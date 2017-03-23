@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Alexey Makarov](https://up.htmlacademy.ru/javascript/9/user/171780).
-* Наставник: [Денис Верхотуров](https://htmlacademy.ru/profile/id56756).
+* Наставник: [Данил Чекалин](https://htmlacademy.ru/profile/id335807).
 
 ---
 
