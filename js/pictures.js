@@ -25,7 +25,24 @@ function pictureGenerator() {
 }
 
 for (var i = 0; i < 25; i++) {
-  pictureArray[i] = pictureGenerator();
+  // pictureArray[i] = pictureGenerator();
+  pictureArray.push(pictureGenerator());
 }
 
-console.log(pictureArray);
+// var pictureUploard = document.querySelector('.pictures');
+// pictureUploard.classList.add('invisible');
+
+var pictureTemplate = document.querySelector('#picture-template').content;
+
+for (var j = 0; j < pictureArray.length; j++) {
+  var pictureElement = pictureTemplate.cloneNode(true);
+
+  pictureElement.querySelector('img').src = pictureGenerator().url;
+  pictureElement.querySelector('.picture-likes').textContent = pictureGenerator().likes;
+  pictureElement.querySelector('.picture-comments').textContent = pictureGenerator().comments;
+
+};
+
+/////////////////////////////////////////////
+
+// console.log(pictureElement.querySelector('.picture-comments').textContent = pictureGenerator().comments);
