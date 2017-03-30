@@ -33,6 +33,8 @@ for (var i = 0; i < 25; i++) {
 // pictureUploard.classList.add('invisible');
 
 var pictureTemplate = document.querySelector('#picture-template').content;
+var pictureList = document.querySelector('.pictures');
+var pictureListFragment = document.createDocumentFragment();
 
 for (var j = 0; j < pictureArray.length; j++) {
   var pictureElement = pictureTemplate.cloneNode(true);
@@ -41,8 +43,11 @@ for (var j = 0; j < pictureArray.length; j++) {
   pictureElement.querySelector('.picture-likes').textContent = pictureGenerator().likes;
   pictureElement.querySelector('.picture-comments').textContent = pictureGenerator().comments;
 
+  pictureListFragment.appendChild(pictureElement);
 };
+
+pictureList.appendChild(pictureListFragment);
 
 /////////////////////////////////////////////
 
-// console.log(pictureElement.querySelector('.picture-comments').textContent = pictureGenerator().comments);
+console.log(pictureList);
