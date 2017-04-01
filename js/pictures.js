@@ -10,7 +10,6 @@ for (var k = 0; k < 25; k++) {
   adressesArray.push('photos/' + (k + 1) + '.jpg');
 }
 
-
 var randomComment = commentsTextArray[numGenerator(0, commentsTextArray.length - 1)];
 var commentSingle = randomComment;
 var commentDouble = randomComment + ' ' + randomComment;
