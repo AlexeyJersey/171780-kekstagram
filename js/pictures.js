@@ -6,15 +6,14 @@ var commentsTextArray = ['Всё отлично!', 'В целом всё неп�
 var pictureDescriptionArray = [];
 
 for (var k = 0; k < 25; k++) {
-  pictureDescriptionArray.push(pictureGenerator());
   adressesArray.push('photos/' + (k + 1) + '.jpg');
+  pictureDescriptionArray.push(pictureGenerator());
 }
 
 var randomComment = commentsTextArray[numGenerator(0, commentsTextArray.length - 1)];
 var commentSingle = randomComment;
 var commentDouble = randomComment + ' ' + randomComment;
-var commentsArray = [commentSingle, commentDouble];
-var commentsText = commentsArray[commentsQty() - 1];
+// var commentsArray = [commentSingle, commentDouble];
 
 var pictureTemplate = document.querySelector('#picture-template').content;
 var pictureList = document.querySelector('.pictures');
@@ -28,7 +27,7 @@ for (var l = 0; l < pictureDescriptionArray.length; l++) {
   pictureElement.querySelector('.picture-comments').textContent = pictureDescriptionArray[l].comments;
 
   pictureListFragment.appendChild(pictureElement);
-};
+}
 
 pictureList.appendChild(pictureListFragment);
 
@@ -47,38 +46,39 @@ function numGenerator(minNumber, maxNumber) {
   return numberRandom;
 }
 
-function takeAnyValueFromArray(array) {
-  return array[numGenerator(0, array.length - 1)];
-}
+// function takeAnyValueFromArray(array) {
+//   return array[numGenerator(0, array.length - 1)];
+// }
 
 function shuffle(array) {
-  for(var j, x, i = array.length; i; j = parseInt(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x);
+  for (var j, x, i = array.length; i; j = parseInt(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x); {
     return array;
-};
-
-function commentsQty() {
-  if (numGenerator(0 , 1) == 0) {
-    return 1;
-  } else {
-    return 2;
   }
-};
-
-function pictureNorepeatAdress() {
-  adressesArray = shuffle(adressesArray);
-  if (adressesArray.length) {
-    return adressesArray.pop();
-  } else {
-    return adressesArray;
-  }
-};
+}
 
 function pictureGenerator() {
   return {
     url: pictureNorepeatAdress(),
     likes: numGenerator(15, 200),
     comments: commentsQty()
-  }
-};
+  };
+}
 
-// console.log(pictureDescriptionArray);
+function pictureNorepeatAdress() {
+  adressesArray = shuffle(adressesArray);
+  if (adressesArray.length) {
+    return adressesArray.pop();
+  } else {
+    return null;
+  }
+}
+
+function commentsQty() {
+  if (numGenerator(0, 1) === 0) {
+    commentSingle = 1;
+    return commentSingle;
+  } else {
+    commentDouble = 2;
+    return commentDouble;
+  }
+}
