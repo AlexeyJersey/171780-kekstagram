@@ -37,16 +37,12 @@ function uploadOverlayHide() {
   document.querySelector('.upload-overlay').classList.add('invisible');
 }
 
-function galleryOverlayHide() {
-  document.querySelector('.gallery-overlay').classList.add('invisible');
-}
-
 picturesShow();
 galleryOverlayShow();
 
 function generatePictureCollection() {
   var pictureCollection = [];
-  for (var j = 0; j < 25; j++) {;
+  for (var j = 0; j < 25; j++) {
     pictureCollection.push(pictureGenerator());
   }
   return pictureCollection;
@@ -61,17 +57,15 @@ function pictureGenerator() {
 }
 
 function generateComment() {
-  var singleComment;
-  var doubleComment;
   var singleSentence = commentsCollection[numGen(0, commentsCollection.length - 1)];
   var doubleSentence = commentsCollection[numGen(0, commentsCollection.length - 1)] + ' ' + commentsCollection[numGen(0, commentsCollection.length - 1)];
   if (numGen(0, 1) === 0) {
-    return singleComment = {
+    return {
       text: singleSentence,
       length: 1
     };
   } else {
-    return doubleComment = {
+    return {
       text: doubleSentence,
       length: 2
     };
@@ -84,7 +78,7 @@ function generatePhotoUrl() {
 
 function fillPhotoIds() {
   var idCollection = [];
-  for (var i = 1; i < 26; i++) {;
+  for (var i = 1; i < 26; i++) {
     idCollection.push(i);
   }
   return idCollection.sort(function (a, b) {
