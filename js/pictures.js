@@ -10,18 +10,21 @@ var galleryOverlayClose = galleryOverlay.querySelector('.gallery-overlay-close')
 var pictureList = document.querySelector('.pictures');
 var upload = document.querySelector('.upload');
 
+var ESC_KEY = 27;
+var ENTER_KEY = 13;
+
 uploadOverlayHide();
 picturesShow();
 uploadFormShow();
 
 upload.querySelector('.upload-form-description').addEventListener('keydown', function(evt) {
-  if (evt.keyCode === 27) {
+  if (evt.keyCode === ESC_KEY) {
     evt.stopPropagation();
   }
 })
 
 document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 27) {
+  if (evt.keyCode === ESC_KEY) {
     uploadOverlayHide();
   }
 })
@@ -39,7 +42,7 @@ pictureList.querySelector('.picture').addEventListener('click', function (evt) {
 })
 
 document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 27) {
+  if (evt.keyCode === ESC_KEY) {
     galleryOverlay.classList.add('invisible');
   }
 })
@@ -74,7 +77,7 @@ function uploadFormShow() {
 }
 
 function isActivationEvent(evt) {
-  return evt.keyCode && evt.keyCode === 13;
+  return evt.keyCode && evt.keyCode === ENTER_KEY;
 }
 
 //////////////////////////////////////////////////////
