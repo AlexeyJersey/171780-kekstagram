@@ -17,15 +17,15 @@ uploadOverlayHide();
 picturesShow();
 uploadFormShow();
 
-upload.querySelector('.upload-form-description').addEventListener('keydown', function(evt) {
+upload.querySelector('.upload-form-description').addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEY) {
     evt.stopPropagation();
   }
-})
+});
 
-upload.querySelector('.upload-form-cancel').addEventListener('click', function() {
+upload.querySelector('.upload-form-cancel').addEventListener('click', function () {
   uploadOverlayHide();
-})
+});
 
 upload.querySelector('#upload-file').addEventListener('change', function () {
   uploadOverlayShow();
@@ -34,27 +34,27 @@ upload.querySelector('#upload-file').addEventListener('change', function () {
     if (evt.keyCode === ESC_KEY) {
       uploadOverlayHide();
     }
-  })
-})
+  });
+});
 
 pictureList.querySelector('.picture').addEventListener('click', function (evt) {
   galleryOverlayShow();
-})
+});
 
-galleryOverlayClose.addEventListener('click', function() {
+galleryOverlayClose.addEventListener('click', function () {
   galleryOverlayHide();
-})
+});
 
-galleryOverlayClose.addEventListener('keydown', function(evt) {
+galleryOverlayClose.addEventListener('keydown', function (evt) {
   if (isActivationEvent(evt)) {
     galleryOverlayHide();
   }
-})
+});
 
-pictureList.addEventListener('click', function(evt) {
+pictureList.addEventListener('click', function (evt) {
   evt.preventDefault();
   var target = evt.target;
-  while (target != pictureList) {
+  while (target !== pictureList) {
     if (target.tagName === 'A') {
       var url = target.querySelector('img').getAttribute('src');
       var likes = target.querySelector('.picture-likes').textContent;
@@ -69,9 +69,9 @@ pictureList.addEventListener('click', function(evt) {
     if (evt.keyCode === ESC_KEY) {
       galleryOverlayHide();
     }
-  })
+  });
 
-})
+});
 
 function galleryOverlayShow() {
   galleryOverlay.classList.remove('invisible');
