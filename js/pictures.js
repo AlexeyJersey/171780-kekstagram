@@ -23,37 +23,31 @@ upload.querySelector('.upload-form-description').addEventListener('keydown', fun
   }
 })
 
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ESC_KEY) {
-    uploadOverlayHide();
-  }
-})
-
 upload.querySelector('.upload-form-cancel').addEventListener('click', function() {
   uploadOverlayHide();
 })
 
 upload.querySelector('#upload-file').addEventListener('change', function () {
-  upload.querySelector('.upload-overlay').classList.remove('invisible');
+  uploadOverlayShow();
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ESC_KEY) {
+      uploadOverlayHide();
+    }
+  })
 })
 
 pictureList.querySelector('.picture').addEventListener('click', function (evt) {
-  galleryOverlay.classList.remove('invisible');
-})
-
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ESC_KEY) {
-    galleryOverlay.classList.add('invisible');
-  }
+  galleryOverlayShow();
 })
 
 galleryOverlayClose.addEventListener('click', function() {
-  galleryOverlay.classList.add('invisible');
+  galleryOverlayHide();
 })
 
 galleryOverlayClose.addEventListener('keydown', function(evt) {
   if (isActivationEvent(evt)) {
-    galleryOverlay.classList.add('invisible');
+    galleryOverlayHide();
   }
 })
 
@@ -70,7 +64,26 @@ pictureList.addEventListener('click', function(evt) {
     }
     target = target.parentNode;
   }
-});
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ESC_KEY) {
+      galleryOverlayHide();
+    }
+  })
+
+})
+
+function galleryOverlayShow() {
+  galleryOverlay.classList.remove('invisible');
+}
+
+function galleryOverlayHide() {
+  galleryOverlay.classList.add('invisible');
+}
+
+function uploadOverlayShow() {
+  upload.querySelector('.upload-overlay').classList.remove('invisible');
+}
 
 function uploadFormShow() {
   upload.querySelector('.upload-form').classList.remove('invisible');
@@ -79,8 +92,6 @@ function uploadFormShow() {
 function isActivationEvent(evt) {
   return evt.keyCode && evt.keyCode === ENTER_KEY;
 }
-
-//////////////////////////////////////////////////////
 
 function galleryOverlayPictureRender(url, likes, comments) {
   galleryOverlay.querySelector('.gallery-overlay-image').src = url;
