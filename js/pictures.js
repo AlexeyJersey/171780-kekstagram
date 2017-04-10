@@ -16,6 +16,7 @@ var ENTER_KEY = 13;
 uploadOverlayHide();
 picturesShow();
 uploadFormShow();
+onClickSmallPicture();
 
 document.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEY) {
@@ -38,10 +39,6 @@ upload.querySelector('#upload-file').addEventListener('change', function () {
   uploadOverlayShow();
 });
 
-pictureList.querySelector('.picture').addEventListener('click', function (evt) {
-  galleryOverlayShow();
-});
-
 galleryOverlayClose.addEventListener('click', function () {
   galleryOverlayHide();
 });
@@ -52,16 +49,17 @@ galleryOverlayClose.addEventListener('keydown', function (evt) {
   }
 });
 
-
-var pictureNodeList = document.querySelectorAll('.picture');
-for (var l = 0; l < pictureNodeList.length; l++) {
-  pictureNodeList[l].addEventListener('click', function (evt) {
-    evt.preventDefault();
-    var url = this.pictureProperties.url;
-    var likes = this.pictureProperties.likes;
-    var comments = this.pictureProperties.comments;
-    galleryOverlayRender(url, likes, comments);
-  });
+function onClickSmallPicture() {
+  var pictureNodeList = document.querySelectorAll('.picture');
+  for (var l = 0; l < pictureNodeList.length; l++) {
+    pictureNodeList[l].addEventListener('click', function (evt) {
+      evt.preventDefault();
+      var url = this.pictureProperties.url;
+      var likes = this.pictureProperties.likes;
+      var comments = this.pictureProperties.comments;
+      galleryOverlayRender(url, likes, comments);
+    });
+  }
 }
 
 function galleryOverlayRender(url, likes, comments) {
