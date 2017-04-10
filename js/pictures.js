@@ -13,26 +13,14 @@ var upload = document.querySelector('.upload');
 var ESC_KEY = 27;
 var ENTER_KEY = 13;
 
-var pictureNodeList = document.querySelectorAll('.picture');
-
-for (var l = 0; l < pictureNodeList.length; l++) {
-  pictureNodeList[l].addEventListener('click', function (evt) {
-    evt.preventDefault();
-    var url = this.pictureProperties.url;
-    var likes = this.pictureProperties.likes;
-    var comments = this.pictureProperties.comments;
-    galleryOverlayRender(url, likes, comments);
-  });
-}
-
 uploadOverlayHide();
 picturesShow();
 uploadFormShow();
 
 document.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEY) {
-    uploadOverlayHide();
     galleryOverlayHide();
+    uploadOverlayHide();
   }
 });
 
@@ -64,19 +52,32 @@ galleryOverlayClose.addEventListener('keydown', function (evt) {
   }
 });
 
+
+var pictureNodeList = document.querySelectorAll('.picture');
+for (var l = 0; l < pictureNodeList.length; l++) {
+  pictureNodeList[l].addEventListener('click', function (evt) {
+    evt.preventDefault();
+    var url = this.pictureProperties.url;
+    var likes = this.pictureProperties.likes;
+    var comments = this.pictureProperties.comments;
+    galleryOverlayRender(url, likes, comments);
+  });
+}
+
 function galleryOverlayRender(url, likes, comments) {
   galleryOverlay.querySelector('.gallery-overlay-image').src = url;
   galleryOverlay.querySelector('.likes-count').textContent = likes;
   galleryOverlay.querySelector('.comments-count').textContent = comments;
   galleryOverlayClose.setAttribute('tabindex', '0');
   galleryOverlayShow();
+
 }
 
 function picturesShow() {
   var pictureTemplate = document.querySelector('#picture-template').content;
   var pictureListFragment = document.createDocumentFragment();
 
-  for (var k = 0; k < pictureObjectCollection.length; k++) {
+  for (var k = 0; k < generatePictureCollection().length; k++) {
     var pictureElement = pictureTemplate.cloneNode(true);
 
     pictureElement.querySelector('img').src = pictureObjectCollection[k].url;
@@ -170,4 +171,3 @@ function numGen(min, max) {
   numberRandom = numberRandom.toFixed();
   return +numberRandom;
 }
-
