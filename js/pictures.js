@@ -13,6 +13,18 @@ var upload = document.querySelector('.upload');
 var ESC_KEY = 27;
 var ENTER_KEY = 13;
 
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEY) {
+    uploadOverlayHide();
+  }
+});
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEY) {
+    galleryOverlayHide();
+  }
+});
+
 uploadOverlayHide();
 picturesShow();
 uploadFormShow();
@@ -29,12 +41,6 @@ upload.querySelector('.upload-form-cancel').addEventListener('click', function (
 
 upload.querySelector('#upload-file').addEventListener('change', function () {
   uploadOverlayShow();
-
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEY) {
-      uploadOverlayHide();
-    }
-  });
 });
 
 pictureList.querySelector('.picture').addEventListener('click', function (evt) {
@@ -69,19 +75,13 @@ function galleryOverlayRender(url, likes, comments) {
   galleryOverlay.querySelector('.comments-count').textContent = comments;
   galleryOverlayClose.setAttribute('tabindex', '0');
   galleryOverlayShow();
-
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEY) {
-      galleryOverlayHide();
-    }
-  });
 }
 
 function picturesShow() {
   var pictureTemplate = document.querySelector('#picture-template').content;
   var pictureListFragment = document.createDocumentFragment();
 
-  for (var k = 0; k < generatePictureCollection().length; k++) {
+  for (var k = 0; k < pictureObjectCollection.length; k++) {
     var pictureElement = pictureTemplate.cloneNode(true);
 
     pictureElement.querySelector('img').src = pictureObjectCollection[k].url;
