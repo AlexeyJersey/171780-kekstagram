@@ -77,7 +77,7 @@ function picturesShow() {
   var pictureTemplate = document.querySelector('#picture-template').content;
   var pictureListFragment = document.createDocumentFragment();
 
-  for (var k = 0; k < generatePictureCollection().length; k++) {
+  for (var k = 0; k < pictureObjectCollection.length; k++) {
     var pictureElement = pictureTemplate.cloneNode(true);
 
     pictureElement.querySelector('img').src = pictureObjectCollection[k].url;
