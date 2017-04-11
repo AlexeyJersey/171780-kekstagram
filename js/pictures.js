@@ -13,6 +13,11 @@ var upload = document.querySelector('.upload');
 var uploadForm = document.querySelector('.upload-form');
 var uploadFormTextarea = document.querySelector('textarea');
 
+var uploadFormResize = document.querySelector('.upload-resize-controls');
+var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
+var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
+var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
+
 var ESC_KEY = 27;
 var ENTER_KEY = 13;
 
@@ -21,12 +26,13 @@ picturesShow();
 uploadFormShow();
 onClickSmallPicture();
 uploadFormCommentsProperties();
+onResizeControlsBtnClick();
 
 //1. Размер коммента ограничен
 // ------------------------------
-//1.1 Обязательное поле required
-//1.2 Мин длина комментария 30 символов minlength="30"
-//1.3 Макс длина комментария 100 символов maxlength="100"
+//1.1 Обязательное поле required OK
+//1.2 Мин длина комментария 30 символов minlength="30" OK
+//1.3 Макс длина комментария 100 символов maxlength="100" OK
 
 function uploadFormCommentsProperties() {
   uploadFormTextarea.setAttribute('minlength', '30');
@@ -36,26 +42,40 @@ function uploadFormCommentsProperties() {
 
 // 2. Форма ввода масштаба .upload-resize-controls-value ограничена
 // ----------------------------------
-// 2.1 Шаг — 25%
-// 2.2 Минимальный масштаб — 25%
-// 2.3 Маскимальный масштаб — 100%
-//  step="25%" min="0%" max="100%"
+// 2.1 Шаг — 25% OK
+// 2.2 Минимальный масштаб — 25% OK
+// 2.3 Маскимальный масштаб — 100% OK
 
-var uploadFormResize = document.querySelector('.upload-resize-controls');
-var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
-var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
-var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
+function onResizeControlsBtnClick() {
+  var a = Number(uploadFormResizeValue.value.slice(0, -1));
 
-// document.querySelector('.upload-resize-controls-value').setAttribute('value', '25%');
-console.log(uploadFormResizeDec);
+  uploadFormResizeDec.addEventListener('click', function () {
+    if (a >= 25) {
+      a = a - 25;
+    } else {
+      a = 0;
+    }
+    uploadFormResizeValue.value = a + '%';
+  });
 
-// uploadFormResizeValue.setAttribute('step', 25);
+  uploadFormResizeInc.addEventListener('click', function () {
+    if (a <= 75) {
+      a = a + 25;
+    } else {
+      a = 100;
+    }
+    uploadFormResizeValue.value = a + '%';
+  });
 
-// uploadFormResizeDec.addEventListener('click', function () {
-//   uploadFormResizeValue.setAttribute('value', '25%');
-// });
+}
+
+// 3. Применение фильтра к изображению
+// ------------------------------------------
 
 
+console.log();
+
+////////////////////////////////////////////////////
 
 document.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEY) {
