@@ -8,15 +8,54 @@ var pictureObjectCollection = generatePictureCollection();
 var galleryOverlay = document.querySelector('.gallery-overlay');
 var galleryOverlayClose = galleryOverlay.querySelector('.gallery-overlay-close');
 var pictureList = document.querySelector('.pictures');
+
 var upload = document.querySelector('.upload');
+var uploadForm = document.querySelector('.upload-form');
+var uploadFormTextarea = document.querySelector('textarea');
 
 var ESC_KEY = 27;
 var ENTER_KEY = 13;
 
-uploadOverlayHide();
+// uploadOverlayHide();
 picturesShow();
 uploadFormShow();
 onClickSmallPicture();
+uploadFormCommentsProperties();
+
+//1. Размер коммента ограничен
+// ------------------------------
+//1.1 Обязательное поле required
+//1.2 Мин длина комментария 30 символов minlength="30"
+//1.3 Макс длина комментария 100 символов maxlength="100"
+
+function uploadFormCommentsProperties() {
+  uploadFormTextarea.setAttribute('minlength', '30');
+  uploadFormTextarea.setAttribute('maxlength', '100');
+  uploadFormTextarea.setAttribute('required', 'required');
+}
+
+// 2. Форма ввода масштаба .upload-resize-controls-value ограничена
+// ----------------------------------
+// 2.1 Шаг — 25%
+// 2.2 Минимальный масштаб — 25%
+// 2.3 Маскимальный масштаб — 100%
+//  step="25%" min="0%" max="100%"
+
+var uploadFormResize = document.querySelector('.upload-resize-controls');
+var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
+var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
+var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
+
+// document.querySelector('.upload-resize-controls-value').setAttribute('value', '25%');
+console.log(uploadFormResizeDec);
+
+// uploadFormResizeValue.setAttribute('step', 25);
+
+// uploadFormResizeDec.addEventListener('click', function () {
+//   uploadFormResizeValue.setAttribute('value', '25%');
+// });
+
+
 
 document.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEY) {
