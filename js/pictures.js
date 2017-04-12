@@ -11,7 +11,6 @@ var pictureList = document.querySelector('.pictures');
 
 var upload = document.querySelector('.upload');
 var uploadOverlay = document.querySelector('.upload-overlay');
-var uploadForm = document.querySelector('.upload-form');
 var uploadFormTextarea = document.querySelector('textarea');
 var uploadFormResize = document.querySelector('.upload-resize-controls');
 var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
@@ -37,7 +36,6 @@ uploadFilterControls.addEventListener('click', function (evt) {
   if (target.tagName === 'INPUT') {
     deleteSecondClass(uploadImgPreview);
     uploadImgPreview.classList.add(target.dataset.class);
-    console.log(uploadImgPreview.classList[1]);
   }
 });
 
@@ -75,14 +73,14 @@ galleryOverlayClose.addEventListener('keydown', function (evt) {
 function onSendButtonClick() {
   document.querySelector('.upload-form-submit').addEventListener('click', function () {
     if (uploadFormTextarea.validity.valid === false) {
-      uploadFormTextarea.style= 'outline-color: red';
+      uploadFormTextarea.style = 'outline-color: red';
     } else {
-      uploadFormTextarea.style= 'outline-color: none';
+      uploadFormTextarea.style = 'outline-color: none';
     }
   });
 
   uploadFormTextarea.addEventListener('click', function () {
-    uploadFormTextarea.style= 'outline-color: none';
+    uploadFormTextarea.style = 'outline-color: none';
   });
 }
 
@@ -93,13 +91,11 @@ function renderUploadFilterNodeList() {
   }
 }
 
-function deleteSecondClass (nodeElement) {
+function deleteSecondClass(nodeElement) {
   if (nodeElement.classList[1]) {
     nodeElement.classList.remove(nodeElement.classList[1]);
-  } else {
-    false;
   }
-};
+}
 
 function onResizeControlsBtnClick() {
   var value = Number(uploadFormResizeValue.value.slice(0, -1));
