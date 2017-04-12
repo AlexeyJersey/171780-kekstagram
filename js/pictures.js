@@ -18,6 +18,11 @@ var uploadFormResize = document.querySelector('.upload-resize-controls');
 var uploadOverlay = document.querySelector('.upload-overlay');
 var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
 
+var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
+var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
+var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
+var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
+
 var ESC_KEY = 27;
 var ENTER_KEY = 13;
 
@@ -26,37 +31,8 @@ picturesShow();
 uploadFormShow();
 onClickSmallPicture();
 uploadFormCommentsProperties();
-
-var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
-var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
-var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
-var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
-
 onResizeControlsBtnClick();
 renderUploadFilterNodeList();
-
-function onResizeControlsBtnClick() {
-  var a = Number(uploadFormResizeValue.value.slice(0, -1));
-
-  uploadFormResizeDec.addEventListener('click', function () {
-    if (a >= 25) {
-      a = a - 25;
-    } else {
-      a = 0;
-    }
-    uploadFormResizeValue.value = a + '%';
-  });
-
-  uploadFormResizeInc.addEventListener('click', function () {
-    if (a <= 75) {
-      a = a + 25;
-    } else {
-      a = 100;
-    }
-    uploadFormResizeValue.value = a + '%';
-  });
-
-}
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -114,6 +90,31 @@ function deleteSecondClass (nodeElement) {
     false;
   }
 };
+
+function onResizeControlsBtnClick() {
+  var value = Number(uploadFormResizeValue.value.slice(0, -1));
+  uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
+
+  uploadFormResizeDec.addEventListener('click', function (evt) {
+    if (evt.target === uploadFormResizeDec, value >= 25) {
+      value = value - 25;
+    } else {
+      value = 0;
+    }
+    uploadFormResizeValue.value = value + '%';
+    uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
+  });
+
+  uploadFormResizeInc.addEventListener('click', function (evt) {
+    if (evt.target === uploadFormResizeDec, value <= 75) {
+      value = value + 25;
+    } else {
+      value = 100;
+    }
+    uploadFormResizeValue.value = value + '%';
+    uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
+  });
+}
 
 function uploadFormCommentsProperties() {
   uploadFormTextarea.setAttribute('minlength', '30');
