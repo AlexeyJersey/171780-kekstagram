@@ -102,10 +102,10 @@ function onResizeControlsBtnClick() {
   uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
 
   uploadFormResizeDec.addEventListener('click', function (evt) {
-    if (evt.target === uploadFormResizeDec, value >= 25) {
+    if (evt.target === uploadFormResizeDec, value >= 50) {
       value = value - 25;
     } else {
-      value = 0;
+      value = 25;
     }
     uploadFormResizeValue.value = value + '%';
     uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
