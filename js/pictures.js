@@ -10,31 +10,27 @@ var galleryOverlayClose = galleryOverlay.querySelector('.gallery-overlay-close')
 var pictureList = document.querySelector('.pictures');
 
 var upload = document.querySelector('.upload');
+var uploadOverlay = document.querySelector('.upload-overlay');
 var uploadForm = document.querySelector('.upload-form');
 var uploadFormTextarea = document.querySelector('textarea');
-
 var uploadFormResize = document.querySelector('.upload-resize-controls');
-
-var uploadOverlay = document.querySelector('.upload-overlay');
-var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
-
 var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
 var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
 var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
 var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
+var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
 
 var ESC_KEY = 27;
 var ENTER_KEY = 13;
 
-// uploadOverlayHide();
+uploadOverlayHide();
 picturesShow();
 uploadFormShow();
-onClickSmallPicture();
+onSmallPictureClick();
 uploadFormCommentsProperties();
 onResizeControlsBtnClick();
 renderUploadFilterNodeList();
-
-////////////////////////////////////////////////////////////////////////
+onSendButtonClick();
 
 uploadFilterControls.addEventListener('click', function (evt) {
   var target = evt.target;
@@ -75,6 +71,20 @@ galleryOverlayClose.addEventListener('keydown', function (evt) {
     galleryOverlayHide();
   }
 });
+
+function onSendButtonClick() {
+  document.querySelector('.upload-form-submit').addEventListener('click', function () {
+    if (uploadFormTextarea.validity.valid === false) {
+      uploadFormTextarea.style= 'outline-color: red';
+    } else {
+      uploadFormTextarea.style= 'outline-color: none';
+    }
+  });
+
+  uploadFormTextarea.addEventListener('click', function () {
+    uploadFormTextarea.style= 'outline-color: none';
+  });
+}
 
 function renderUploadFilterNodeList() {
   var uploadFilterNodeList = uploadFilterControls.querySelectorAll('input');
@@ -122,7 +132,7 @@ function uploadFormCommentsProperties() {
   uploadFormTextarea.setAttribute('required', 'required');
 }
 
-function onClickSmallPicture() {
+function onSmallPictureClick() {
   var pictureNodeList = document.querySelectorAll('.picture');
   for (var l = 0; l < pictureNodeList.length; l++) {
     pictureNodeList[l].addEventListener('click', function (evt) {
