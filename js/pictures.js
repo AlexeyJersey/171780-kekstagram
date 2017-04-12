@@ -18,64 +18,29 @@ var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-control
 var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
 var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
 
+var uploadOverlay = document.querySelector('.upload-overlay');
+var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
+var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
+
 var ESC_KEY = 27;
 var ENTER_KEY = 13;
 
-// uploadOverlayHide();
+uploadOverlayHide();
 picturesShow();
 uploadFormShow();
 onClickSmallPicture();
 uploadFormCommentsProperties();
 onResizeControlsBtnClick();
+renderUploadFilterNodeList();
 
-//1. Размер коммента ограничен
-// ------------------------------
-//1.1 Обязательное поле required OK
-//1.2 Мин длина комментария 30 символов minlength="30" OK
-//1.3 Макс длина комментария 100 символов maxlength="100" OK
-
-function uploadFormCommentsProperties() {
-  uploadFormTextarea.setAttribute('minlength', '30');
-  uploadFormTextarea.setAttribute('maxlength', '100');
-  uploadFormTextarea.setAttribute('required', 'required');
-}
-
-// 2. Форма ввода масштаба .upload-resize-controls-value ограничена
-// ----------------------------------
-// 2.1 Шаг — 25% OK
-// 2.2 Минимальный масштаб — 25% OK
-// 2.3 Маскимальный масштаб — 100% OK
-
-function onResizeControlsBtnClick() {
-  var a = Number(uploadFormResizeValue.value.slice(0, -1));
-
-  uploadFormResizeDec.addEventListener('click', function () {
-    if (a >= 25) {
-      a = a - 25;
-    } else {
-      a = 0;
-    }
-    uploadFormResizeValue.value = a + '%';
-  });
-
-  uploadFormResizeInc.addEventListener('click', function () {
-    if (a <= 75) {
-      a = a + 25;
-    } else {
-      a = 100;
-    }
-    uploadFormResizeValue.value = a + '%';
-  });
-
-}
-
-// 3. Применение фильтра к изображению
-// ------------------------------------------
-
-
-console.log();
-
-////////////////////////////////////////////////////
+uploadFilterControls.addEventListener('click', function (evt) {
+  var target = evt.target;
+  if (target.tagName === 'INPUT') {
+    deleteSecondClass(uploadImgPreview);
+    uploadImgPreview.classList.add(target.dataset.class);
+    console.log(uploadImgPreview.classList[1]);
+  }
+});
 
 document.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEY) {
@@ -107,6 +72,50 @@ galleryOverlayClose.addEventListener('keydown', function (evt) {
     galleryOverlayHide();
   }
 });
+
+function renderUploadFilterNodeList() {
+  var uploadFilterNodeList = uploadFilterControls.querySelectorAll('input');
+  for (var m = 0; m < uploadFilterNodeList.length; m++) {
+    uploadFilterNodeList[m].dataset.class = 'filter-' + uploadFilterNodeList[m].value;
+  }
+}
+
+function deleteSecondClass (nodeElement) {
+  if (nodeElement.classList[1]) {
+    nodeElement.classList.remove(nodeElement.classList[1]);
+  } else {
+    false;
+  }
+};
+
+function uploadFormCommentsProperties() {
+  uploadFormTextarea.setAttribute('minlength', '30');
+  uploadFormTextarea.setAttribute('maxlength', '100');
+  uploadFormTextarea.setAttribute('required', 'required');
+}
+
+function onResizeControlsBtnClick() {
+  var a = Number(uploadFormResizeValue.value.slice(0, -1));
+
+  uploadFormResizeDec.addEventListener('click', function () {
+    if (a >= 25) {
+      a = a - 25;
+    } else {
+      a = 0;
+    }
+    uploadFormResizeValue.value = a + '%';
+  });
+
+  uploadFormResizeInc.addEventListener('click', function () {
+    if (a <= 75) {
+      a = a + 25;
+    } else {
+      a = 100;
+    }
+    uploadFormResizeValue.value = a + '%';
+  });
+
+}
 
 function onClickSmallPicture() {
   var pictureNodeList = document.querySelectorAll('.picture');
