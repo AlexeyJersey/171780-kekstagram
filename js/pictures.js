@@ -58,6 +58,7 @@ upload.querySelector('.upload-form-cancel').addEventListener('click', function (
 
 upload.querySelector('#upload-file').addEventListener('change', function () {
   uploadOverlayShow();
+  deleteSecondClass(uploadImgPreview);
 });
 
 galleryOverlayClose.addEventListener('click', function () {
