@@ -1,0 +1,2 @@
+// gallery.js
+'use strict';
