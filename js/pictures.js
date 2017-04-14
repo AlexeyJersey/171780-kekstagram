@@ -148,17 +148,17 @@ function picturesShow() {
   var pictureTemplate = document.querySelector('#picture-template').content;
   var pictureListFragment = document.createDocumentFragment();
 
-  for (var k = 0; k < pictureObjectCollection.length; k++) {
+  for (var k = 0; k < window.moduleData.length; k++) {
     var pictureElement = pictureTemplate.cloneNode(true);
 
-    pictureElement.querySelector('img').src = pictureObjectCollection[k].url;
-    pictureElement.querySelector('.picture-likes').textContent = pictureObjectCollection[k].likes;
-    pictureElement.querySelector('.picture-comments').textContent = pictureObjectCollection[k].comments.length;
+    pictureElement.querySelector('img').src = window.moduleData[k].url;
+    pictureElement.querySelector('.picture-likes').textContent = window.moduleData[k].likes;
+    pictureElement.querySelector('.picture-comments').textContent = window.moduleData[k].comments.length;
     pictureElement.querySelector('img').setAttribute('tabindex', 0);
     pictureElement.querySelector('.picture').pictureProperties = {
-      url: pictureObjectCollection[k].url,
-      likes: pictureObjectCollection[k].likes,
-      comments: pictureObjectCollection[k].comments.length
+      url: window.moduleData[k].url,
+      likes: window.moduleData[k].likes,
+      comments: window.moduleData[k].comments.length
     };
 
     pictureListFragment.appendChild(pictureElement);

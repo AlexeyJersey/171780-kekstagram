@@ -20,4 +20,5 @@ return {
 
 })();
 
-console.log(window.moduleUtils.esc)
+console.log('UTILS')
+console.log(window.moduleUtils)
