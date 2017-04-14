@@ -1,10 +1,6 @@
 // pictures.js
 'use strict';
 
-var galleryOverlay = document.querySelector('.gallery-overlay');
-var galleryOverlayClose = galleryOverlay.querySelector('.gallery-overlay-close');
-
-
 var upload = document.querySelector('.upload');
 var uploadOverlay = document.querySelector('.upload-overlay');
 var uploadFormTextarea = document.querySelector('textarea');
@@ -16,26 +12,24 @@ var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
 var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
 
 uploadOverlayHide();
-
 uploadFormShow();
-onSmallPictureClick();
 uploadFormCommentsProperties();
 onResizeControlsBtnClick();
 renderUploadFilterNodeList();
 onSendButtonClick();
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === window.moduleUtils.esc) {
+    window.modulePreview.galleryOverlayHide();
+    uploadOverlayHide();
+  }
+});
 
 uploadFilterControls.addEventListener('click', function (evt) {
   var target = evt.target;
   if (target.tagName === 'INPUT') {
     deleteSecondClass(uploadImgPreview);
     uploadImgPreview.classList.add(target.dataset.class);
-  }
-});
-
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === window.moduleUtils.esc) {
-    galleryOverlayHide();
-    uploadOverlayHide();
   }
 });
 
@@ -52,16 +46,6 @@ upload.querySelector('.upload-form-cancel').addEventListener('click', function (
 upload.querySelector('#upload-file').addEventListener('change', function () {
   uploadOverlayShow();
   deleteSecondClass(uploadImgPreview);
-});
-
-galleryOverlayClose.addEventListener('click', function () {
-  galleryOverlayHide();
-});
-
-galleryOverlayClose.addEventListener('keydown', function (evt) {
-  if (isActivationEvent(evt)) {
-    galleryOverlayHide();
-  }
 });
 
 function onSendButtonClick() {
@@ -122,14 +106,6 @@ function uploadFormCommentsProperties() {
   uploadFormTextarea.setAttribute('required', 'required');
 }
 
-function galleryOverlayShow() {
-  galleryOverlay.classList.remove('invisible');
-}
-
-function galleryOverlayHide() {
-  galleryOverlay.classList.add('invisible');
-}
-
 function uploadOverlayShow() {
   upload.querySelector('.upload-overlay').classList.remove('invisible');
 }
@@ -138,10 +114,10 @@ function uploadFormShow() {
   upload.querySelector('.upload-form').classList.remove('invisible');
 }
 
-function isActivationEvent(evt) {
-  return evt.keyCode && evt.keyCode === window.moduleUtils.enter;
-}
-
 function uploadOverlayHide() {
   upload.querySelector('.upload-overlay').classList.add('invisible');
+}
+
+function isActivationEvent(evt) {
+  return evt.keyCode && evt.keyCode === window.moduleUtils.enter;
 }

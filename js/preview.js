@@ -1,6 +1,23 @@
 // preview.js
 'use strict'
 
+window.modulePreview = (function() {
+
+var galleryOverlay = document.querySelector('.gallery-overlay');
+var galleryOverlayClose = galleryOverlay.querySelector('.gallery-overlay-close');
+
+// onSmallPictureClick();
+
+galleryOverlayClose.addEventListener('click', function () {
+  galleryOverlayHide();
+});
+
+galleryOverlayClose.addEventListener('keydown', function (evt) {
+  if (isActivationEvent(evt)) {
+    galleryOverlayHide();
+  }
+});
+
 function onSmallPictureClick() {
   var pictureNodeList = document.querySelectorAll('.picture');
   for (var l = 0; l < pictureNodeList.length; l++) {
@@ -22,3 +39,23 @@ function galleryOverlayRender(url, likes, comments) {
   galleryOverlayClose.setAttribute('tabindex', '0');
   galleryOverlayShow();
 }
+
+function galleryOverlayShow() {
+  galleryOverlay.classList.remove('invisible');
+}
+
+function galleryOverlayHide() {
+  galleryOverlay.classList.add('invisible');
+}
+
+return {
+  onSmallPictureClick: onSmallPictureClick,
+  galleryOverlayRender: galleryOverlayRender,
+  galleryOverlayShow: galleryOverlayShow,
+  galleryOverlayHide: galleryOverlayHide
+}
+
+})();
+
+console.log('PREVIEW');
+console.log(window.modulePreview.onSmallPictureClick);

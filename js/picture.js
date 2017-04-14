@@ -1,9 +1,11 @@
 // picture.js
 'use strict'
 
+window.modulePicture = (function(){
+
 var pictureList = document.querySelector('.pictures');
 
-smallPicturesRender();
+// smallPicturesRender();
 
 function smallPicturesRender() {
   var pictureTemplate = document.querySelector('#picture-template').content;
@@ -27,3 +29,12 @@ function smallPicturesRender() {
 
   pictureList.appendChild(pictureListFragment);
 }
+
+return {
+  smallPicturesRender: smallPicturesRender
+}
+
+})();
+
+console.log('PICTURE');
+console.log(window.modulePicture.smallPicturesRender);
