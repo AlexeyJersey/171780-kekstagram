@@ -1,2 +1,0 @@
-// form.js
-'use strict';

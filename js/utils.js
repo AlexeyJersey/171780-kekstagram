@@ -1,7 +1,10 @@
 // utils.js
-'use strict';
+'use strict'
 
-window.moduleUtils = (function () {
+window.moduleUtils = (function() {
+
+var ESC_KEY = 27;
+var ENTER_KEY = 13;
 
 function numGen(min, max) {
   var numberRandom = Math.random() * (max - min);
@@ -10,9 +13,11 @@ function numGen(min, max) {
 }
 
 return {
-  numGen: numGen
-}
+    numGen: numGen,
+    esc: ESC_KEY,
+    enter: ENTER_KEY
+};
 
 })();
 
-console.log(window.moduleUtils);
+console.log(window.moduleUtils.esc)

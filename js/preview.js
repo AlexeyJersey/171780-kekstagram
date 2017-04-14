@@ -1,2 +1,0 @@
-// preview.js
-'use strict';
