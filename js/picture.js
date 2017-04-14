@@ -1,5 +1,5 @@
 // picture.js
-'use strict'
+'use strict';
 
 window.modulePicture = (function(){
 
@@ -36,5 +36,5 @@ return {
 
 })();
 
-console.log('PICTURE');
-console.log(window.modulePicture.smallPicturesRender);
+// console.log('PICTURE');
+// console.log(window.modulePicture.smallPicturesRender);

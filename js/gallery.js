@@ -1,5 +1,5 @@
 // gallery.js
-'use strict'
+'use strict';
 
 window.modulePicture.smallPicturesRender(); // smallPicturesRender();
 window.modulePreview.onSmallPictureClick(); // onSmallPictureClick();

@@ -1,5 +1,5 @@
 // utils.js
-'use strict'
+'use strict';
 
 window.moduleUtils = (function() {
 
@@ -22,3 +22,14 @@ return {
 
 console.log('UTILS')
 console.log(window.moduleUtils)
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === window.moduleUtils.esc) {
+    window.modulePreview.galleryOverlayHide();
+    uploadOverlayHide();
+  }
+});
+
+function isActivationEvent(evt) {
+  return evt.keyCode && evt.keyCode === window.moduleUtils.enter;
+}

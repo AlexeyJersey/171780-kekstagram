@@ -1,5 +1,5 @@
 // preview.js
-'use strict'
+'use strict';
 
 window.modulePreview = (function() {
 
@@ -57,5 +57,5 @@ return {
 
 })();
 
-console.log('PREVIEW');
-console.log(window.modulePreview.onSmallPictureClick);
+// console.log('PREVIEW');
+// console.log(window.modulePreview.onSmallPictureClick);

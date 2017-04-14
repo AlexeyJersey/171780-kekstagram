@@ -1,5 +1,5 @@
 // data.js
-'use strict'
+'use strict';
 
 window.moduleData = (function(){
 
@@ -57,5 +57,5 @@ return pictureObjectCollection;
 
 })();
 
-console.log('DATA')
-console.log(window.moduleData)
+// console.log('DATA')
+// console.log(window.moduleData)
