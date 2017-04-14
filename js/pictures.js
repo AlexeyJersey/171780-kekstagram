@@ -3,7 +3,6 @@
 
 var galleryOverlay = document.querySelector('.gallery-overlay');
 var galleryOverlayClose = galleryOverlay.querySelector('.gallery-overlay-close');
-var pictureList = document.querySelector('.pictures');
 
 var upload = document.querySelector('.upload');
 var uploadOverlay = document.querySelector('.upload-overlay');
@@ -19,7 +18,7 @@ var ESC_KEY = 27;
 var ENTER_KEY = 13;
 
 uploadOverlayHide();
-picturesShow();
+// picturesShow();
 uploadFormShow();
 onSmallPictureClick();
 uploadFormCommentsProperties();
@@ -144,30 +143,6 @@ function galleryOverlayRender(url, likes, comments) {
   galleryOverlay.querySelector('.comments-count').textContent = comments;
   galleryOverlayClose.setAttribute('tabindex', '0');
   galleryOverlayShow();
-
-}
-
-function picturesShow() {
-  var pictureTemplate = document.querySelector('#picture-template').content;
-  var pictureListFragment = document.createDocumentFragment();
-
-  for (var k = 0; k < pictureObjectCollection.length; k++) {
-    var pictureElement = pictureTemplate.cloneNode(true);
-
-    pictureElement.querySelector('img').src = pictureObjectCollection[k].url;
-    pictureElement.querySelector('.picture-likes').textContent = pictureObjectCollection[k].likes;
-    pictureElement.querySelector('.picture-comments').textContent = pictureObjectCollection[k].comments.length;
-    pictureElement.querySelector('img').setAttribute('tabindex', 0);
-    pictureElement.querySelector('.picture').pictureProperties = {
-      url: pictureObjectCollection[k].url,
-      likes: pictureObjectCollection[k].likes,
-      comments: pictureObjectCollection[k].comments.length
-    };
-
-    pictureListFragment.appendChild(pictureElement);
-  }
-
-  pictureList.appendChild(pictureListFragment);
 }
 
 function galleryOverlayShow() {

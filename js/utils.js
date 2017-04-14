@@ -15,4 +15,4 @@ return {
 
 })();
 
-// console.log(window.moduleUtils.numGen(10, 100));
+console.log(window.moduleUtils);
