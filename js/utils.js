@@ -12,24 +12,15 @@ function numGen(min, max) {
   return +numberRandom;
 }
 
-return {
-    numGen: numGen,
-    esc: ESC_KEY,
-    enter: ENTER_KEY
-};
-
-})();
-
-console.log('UTILS')
-console.log(window.moduleUtils)
-
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === window.moduleUtils.esc) {
-    window.modulePreview.galleryOverlayHide();
-    uploadOverlayHide();
-  }
-});
-
 function isActivationEvent(evt) {
   return evt.keyCode && evt.keyCode === window.moduleUtils.enter;
 }
+
+return {
+    numGen: numGen,
+    esc: ESC_KEY,
+    enter: ENTER_KEY,
+    isActivationEvent: isActivationEvent
+};
+
+})();

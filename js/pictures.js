@@ -1,2 +1,0 @@
-// pictures.js
-'use strict';

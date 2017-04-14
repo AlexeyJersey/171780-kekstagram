@@ -56,6 +56,3 @@ function fillPhotoIds() {
 return pictureObjectCollection;
 
 })();
-
-// console.log('DATA')
-// console.log(window.moduleData)

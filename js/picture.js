@@ -5,8 +5,6 @@ window.modulePicture = (function(){
 
 var pictureList = document.querySelector('.pictures');
 
-// smallPicturesRender();
-
 function smallPicturesRender() {
   var pictureTemplate = document.querySelector('#picture-template').content;
   var pictureListFragment = document.createDocumentFragment();
@@ -35,6 +33,3 @@ return {
 }
 
 })();
-
-// console.log('PICTURE');
-// console.log(window.modulePicture.smallPicturesRender);
