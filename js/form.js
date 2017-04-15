@@ -13,12 +13,63 @@
   var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
   var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
 
-  uploadOverlayHide();
+  // uploadOverlayHide();
   uploadFormShow();
   uploadFormCommentsProperties();
   onResizeControlsBtnClick();
   renderUploadFilterNodeList();
   onSendButtonClick();
+
+  /////////////////////////
+
+  var uploadFilterLevel = uploadFilterControls.querySelector('.upload-filter-level');
+  var uploadFilterLevelPin = uploadFilterControls.querySelector('.upload-filter-level-pin');
+  var uploadFilterLevelBar = uploadFilterControls.querySelector('.upload-filter-level-val');
+
+  uploadFilterLevelPin.style.left = 455 + 'px';
+  uploadFilterLevelBar.style.width = 455 + 'px';
+
+  uploadFilterLevelPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+
+    var startCoords = {
+      x: evt.clientX
+    };
+
+    function onMouseMove(moveEvt) {
+      moveEvt.preventDefault();
+
+      var shift = {
+        x: startCoords.x - moveEvt.clientX
+      };
+
+      startCoords = {
+        x: moveEvt.clientX
+      };
+
+      var pinPosition = uploadFilterLevelPin.offsetLeft - shift.x;
+
+      if (pinPosition >= 0 && pinPosition <= 455) {
+        uploadFilterLevelPin.style.left = pinPosition + 'px';
+        uploadFilterLevelBar.style.width = pinPosition + 'px';
+      }
+
+      console.log(pinPosition);
+    }
+
+    function onMouseUp(upEvt) {
+      upEvt.preventDefault();
+
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+
+  });
+
+  //////////////////////////
 
   document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.moduleUtils.esc) {
