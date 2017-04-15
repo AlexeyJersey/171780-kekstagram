@@ -1,7 +1,7 @@
 // gallery.js
 'use strict';
 
-(function(){
+(function () {
 
   window.modulePicture.smallPicturesRender();
   window.modulePreview.onSmallPictureClick();

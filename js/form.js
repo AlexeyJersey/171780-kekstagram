@@ -1,7 +1,7 @@
 // form.js
 'use strict';
 
-(function() {
+(function () {
 
   var upload = document.querySelector('.upload');
   var uploadOverlay = document.querySelector('.upload-overlay');
@@ -21,10 +21,10 @@
   onSendButtonClick();
 
   document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === window.moduleUtils.esc) {
-    uploadOverlayHide();
-  }
-});
+    if (evt.keyCode === window.moduleUtils.esc) {
+      uploadOverlayHide();
+    }
+  });
 
   uploadFilterControls.addEventListener('click', function (evt) {
     var target = evt.target;
