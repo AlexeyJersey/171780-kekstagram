@@ -13,27 +13,76 @@
   var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
   var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
 
-  // uploadOverlayHide();
+  var uploadFilterLevel = uploadFilterControls.querySelector('.upload-filter-level');
+  var uploadFilterLevelPin = uploadFilterControls.querySelector('.upload-filter-level-pin');
+  var uploadFilterLevelBar = uploadFilterControls.querySelector('.upload-filter-level-val');
+
+  var filterObject = {
+
+    none: {
+      filter: 'none',
+      defaultValue: 0,
+      type: function (value) {
+        return false;
+      }
+    },
+
+    chrome: {
+      filter: 'grayscale',
+      defaultValue: 1,
+      type: function (value) {
+        var valueType = value / 100;
+        return valueType;
+      }
+    },
+
+    sepia: {
+      filter: 'sepia',
+      defaultValue: 1,
+      type: function (value) {
+        var valueType = value / 100;
+        return valueType;
+      }
+    },
+
+    marvin: {
+      filter: 'invert',
+      defaultValue: 100 + '%',
+      type: function (value) {
+        var valueType = value;
+        return valueType + '%';
+      }
+    },
+
+    phobos: {
+      filter: 'blur',
+      defaultValue: 3 + 'px',
+      type: function (value) {
+        var valueType = value * 3 / 100;
+        return valueType + 'px';
+      }
+    },
+
+    heat: {
+      filter: 'brightness',
+      defaultValue: 3,
+      type: function (value) {
+        var valueType = value * 3 / 100;
+        return valueType;
+      }
+    }
+
+  };
+
+  uploadOverlayHide();
   uploadFormShow();
   uploadFormCommentsProperties();
   onResizeControlsBtnClick();
   renderUploadFilterNodeList();
   onSendButtonClick();
+  resetPinPosition();
 
-  /////////////////////////
-
-  var uploadFilterLevel = uploadFilterControls.querySelector('.upload-filter-level');
-  var uploadFilterLevelPin = uploadFilterControls.querySelector('.upload-filter-level-pin');
-  var uploadFilterLevelBar = uploadFilterControls.querySelector('.upload-filter-level-val');
-
-  uploadFilterLevelPin.style.left = 100 + '%';
-  uploadFilterLevelBar.style.width = uploadFilterLevelPin.style.left;
-
-  // uploadFilterLevel.classList.add('invisible')
-
-  // (function() {
-
-  // })()
+  uploadFilterLevel.classList.add('invisible');
 
   uploadFilterLevelPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -41,6 +90,9 @@
     var startCoords = {
       x: evt.clientX
     };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
 
     function onMouseMove(moveEvt) {
       moveEvt.preventDefault();
@@ -61,13 +113,13 @@
         uploadFilterLevelBar.style.width = uploadFilterLevelPin.style.left;
       }
 
-      console.log(uploadFilterLevelPin.style.left)
+      var filterNameChecked = uploadOverlay.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
+      var filterName = filterNameChecked;
+      var filterValue = (uploadFilterLevelPin.style.left).slice(0, -1);
+      var adaptedValue = filterObject[filterName].type(filterValue);
+      var currentFilter = filterObject[filterName].filter;
+      renderFilter(currentFilter, adaptedValue);
     }
-
-    // function bal() {
-
-    // }
-
 
     function onMouseUp(upEvt) {
       upEvt.preventDefault();
@@ -76,22 +128,28 @@
       document.removeEventListener('mouseup', onMouseUp);
     }
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-  //////////////////////////
-
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.moduleUtils.esc) {
-      uploadOverlayHide();
-    }
   });
 
   uploadFilterControls.addEventListener('click', function (evt) {
     var target = evt.target;
+    var currentFilterName;
+    var currentFilterDefaultValue;
+
     if (target.tagName === 'INPUT') {
       deleteSecondClass(uploadImgPreview);
       uploadImgPreview.classList.add(target.dataset.class);
+
+      currentFilterName = target.value;
+      currentFilterDefaultValue = filterObject[currentFilterName].defaultValue;
+      renderFilter(currentFilterName, currentFilterDefaultValue);
+      resetPinPosition();
+    }
+
+
+    if (currentFilterName === 'none') {
+      uploadFilterLevel.classList.add('invisible');
+    } else {
+      uploadFilterLevel.classList.remove('invisible');
     }
 
   });
@@ -110,6 +168,23 @@
     uploadOverlayShow();
     deleteSecondClass(uploadImgPreview);
   });
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.moduleUtils.esc) {
+      uploadOverlayHide();
+    }
+  });
+
+  function resetPinPosition() {
+    uploadFilterLevelPin.style.left = 100 + '%';
+    uploadFilterLevelBar.style.width = uploadFilterLevelPin.style.left;
+  }
+
+  function renderFilter(filterName, filterValue) {
+    var scaleValue = Number(uploadFormResizeValue.value.slice(0, -1));
+    uploadImgPreview.style = 'filter:' + filterName + '(' + filterValue + ');' + 'transform: scale(' + scaleValue / 100 + ')';
+  }
+
 
   function onSendButtonClick() {
     document.querySelector('.upload-form-submit').addEventListener('click', function () {
