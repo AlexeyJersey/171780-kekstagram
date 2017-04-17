@@ -26,8 +26,14 @@
   var uploadFilterLevelPin = uploadFilterControls.querySelector('.upload-filter-level-pin');
   var uploadFilterLevelBar = uploadFilterControls.querySelector('.upload-filter-level-val');
 
-  uploadFilterLevelPin.style.left = 455 + 'px';
-  uploadFilterLevelBar.style.width = 455 + 'px';
+  uploadFilterLevelPin.style.left = 100 + '%';
+  uploadFilterLevelBar.style.width = uploadFilterLevelPin.style.left;
+
+  // uploadFilterLevel.classList.add('invisible')
+
+  // (function() {
+
+  // })()
 
   uploadFilterLevelPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -48,14 +54,20 @@
       };
 
       var pinPosition = uploadFilterLevelPin.offsetLeft - shift.x;
+      var pinPositionProc = (pinPosition / 455 * 100).toFixed(1);
 
-      if (pinPosition >= 0 && pinPosition <= 455) {
-        uploadFilterLevelPin.style.left = pinPosition + 'px';
-        uploadFilterLevelBar.style.width = pinPosition + 'px';
+      if (pinPositionProc >= 0 && pinPositionProc <= 100) {
+        uploadFilterLevelPin.style.left = pinPositionProc + '%';
+        uploadFilterLevelBar.style.width = uploadFilterLevelPin.style.left;
       }
 
-      console.log(pinPosition);
+      console.log(uploadFilterLevelPin.style.left)
     }
+
+    // function bal() {
+
+    // }
+
 
     function onMouseUp(upEvt) {
       upEvt.preventDefault();
@@ -66,9 +78,7 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-
   });
-
   //////////////////////////
 
   document.addEventListener('keydown', function (evt) {
@@ -83,6 +93,7 @@
       deleteSecondClass(uploadImgPreview);
       uploadImgPreview.classList.add(target.dataset.class);
     }
+
   });
 
   upload.querySelector('.upload-form-description').addEventListener('keydown', function (evt) {
