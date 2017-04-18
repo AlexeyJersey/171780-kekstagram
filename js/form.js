@@ -214,11 +214,12 @@
   }
 
   function onResizeControlsBtnClick() {
+    uploadFormResizeValue.value = 100 + '%';
     var value = Number(uploadFormResizeValue.value.slice(0, -1));
     uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
 
     uploadFormResizeDec.addEventListener('click', function (evt) {
-      if (evt.target === uploadFormResizeDec, value >= 50) {
+      if (evt.target === uploadFormResizeDec && value >= 50) {
         value = value - 25;
       } else {
         value = 25;
@@ -228,7 +229,7 @@
     });
 
     uploadFormResizeInc.addEventListener('click', function (evt) {
-      if (evt.target === uploadFormResizeDec, value <= 75) {
+      if (evt.target === uploadFormResizeInc && value <= 75) {
         value = value + 25;
       } else {
         value = 100;
