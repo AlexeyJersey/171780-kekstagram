@@ -80,8 +80,6 @@
   onSendButtonClick();
   resetPinPosition();
 
-  renderUploadFilterNodeList();
-
   window.initializeScale.resizeElement(uploadImgPreview, uploadFormResizeDec, uploadFormResizeInc, uploadFormResizeValue, 100, 25);
 
   uploadFilterLevel.classList.add('invisible');
@@ -139,7 +137,7 @@
 
     if (target.tagName === 'INPUT') {
       deleteSecondClass(uploadImgPreview);
-      uploadImgPreview.classList.add(target.dataset.class);
+      uploadImgPreview.classList.add('filter-' + target.value);
 
       currentFilterName = target.value;
       currentFilterDefaultValue = filterObject[currentFilterName].defaultValue;
@@ -151,9 +149,10 @@
       } else {
         uploadFilterLevel.classList.remove('invisible');
       }
+
+      console.log(uploadImgPreview)
     }
 
-    console.log(target)
   });
 
   upload.querySelector('.upload-form-description').addEventListener('keydown', function (evt) {
@@ -199,13 +198,6 @@
     uploadFormTextarea.addEventListener('click', function () {
       uploadFormTextarea.style = 'outline-color: none';
     });
-  }
-
-  function renderUploadFilterNodeList() {
-    var uploadFilterNodeList = uploadFilterControls.querySelectorAll('input');
-    for (var m = 0; m < uploadFilterNodeList.length; m++) {
-      uploadFilterNodeList[m].dataset.class = 'filter-' + uploadFilterNodeList[m].value;
-    }
   }
 
   function deleteSecondClass(nodeElement) {
