@@ -74,10 +74,9 @@
 
   };
 
-  // uploadOverlayHide();
+  uploadOverlayHide();
   uploadFormShow();
   uploadFormCommentsProperties();
-  onResizeControlsBtnClick();
   renderUploadFilterNodeList();
   onSendButtonClick();
   resetPinPosition();
@@ -143,6 +142,7 @@
       currentFilterDefaultValue = filterObject[currentFilterName].defaultValue;
       renderFilter(currentFilterName, currentFilterDefaultValue);
       resetPinPosition();
+      console.log(uploadImgPreview)
     }
 
 
@@ -181,6 +181,7 @@
   }
 
   function renderFilter(filterName, filterValue) {
+    window.initializeScale(uploadImgPreview, scalePicture);
     var scaleValue = Number(uploadFormResizeValue.value.slice(0, -1));
     uploadImgPreview.style = 'filter:' + filterName + '(' + filterValue + ');' + 'transform: scale(' + scaleValue / 100 + ')';
   }
@@ -213,31 +214,14 @@
     }
   }
 
-  function onResizeControlsBtnClick() {
-    uploadFormResizeValue.value = 100 + '%';
-    var value = Number(uploadFormResizeValue.value.slice(0, -1));
-    uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
+  ///////////////////////////////////////
 
-    uploadFormResizeDec.addEventListener('click', function (evt) {
-      if (evt.target === uploadFormResizeDec && value >= 50) {
-        value = value - 25;
-      } else {
-        value = 25;
-      }
-      uploadFormResizeValue.value = value + '%';
-      uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
-    });
-
-    uploadFormResizeInc.addEventListener('click', function (evt) {
-      if (evt.target === uploadFormResizeInc && value <= 75) {
-        value = value + 25;
-      } else {
-        value = 100;
-      }
-      uploadFormResizeValue.value = value + '%';
-      uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
-    });
+  var scalePicture = function (targetNode, scaleValue) {
+    uploadImgPreview.style.transform = 'scale(' + scaleValue / 100 + ')';
+    uploadFormResizeValue.value = scaleValue + '%';
   }
+
+  ///////////////////////////////////////
 
   function uploadFormCommentsProperties() {
     uploadFormTextarea.setAttribute('minlength', '30');
@@ -246,6 +230,7 @@
   }
 
   function uploadOverlayShow() {
+    window.initializeScale(uploadImgPreview, scalePicture);
     upload.querySelector('.upload-overlay').classList.remove('invisible');
   }
 
