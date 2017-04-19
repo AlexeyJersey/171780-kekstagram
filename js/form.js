@@ -175,7 +175,7 @@
     }
   });
 
-  function callbackScalePicture(targetNode, scaleValue) {
+  function callbackPictureScale(targetNode, scaleValue) {
     uploadImgPreview.style.transform = 'scale(' + scaleValue / 100 + ')';
     uploadFormResizeValue.value = scaleValue + '%';
   }
@@ -186,7 +186,7 @@
   }
 
   function renderFilter(filterName, filterValue) {
-    window.initializeScale(uploadImgPreview, callbackScalePicture);
+    window.initializeScale(uploadImgPreview, callbackPictureScale);
     var scaleValue = Number(uploadFormResizeValue.value.slice(0, -1));
     uploadImgPreview.style = 'filter:' + filterName + '(' + filterValue + ');' + 'transform: scale(' + scaleValue / 100 + ')';
   }
@@ -226,7 +226,7 @@
   }
 
   function uploadOverlayShow() {
-    window.initializeScale(uploadImgPreview, callbackScalePicture);
+    window.initializeScale(uploadImgPreview, callbackPictureScale);
     upload.querySelector('.upload-overlay').classList.remove('invisible');
   }
 
