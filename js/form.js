@@ -175,13 +175,18 @@
     }
   });
 
+  function callbackScalePicture(targetNode, scaleValue) {
+    uploadImgPreview.style.transform = 'scale(' + scaleValue / 100 + ')';
+    uploadFormResizeValue.value = scaleValue + '%';
+  }
+
   function resetPinPosition() {
     uploadFilterLevelPin.style.left = 100 + '%';
     uploadFilterLevelBar.style.width = uploadFilterLevelPin.style.left;
   }
 
   function renderFilter(filterName, filterValue) {
-    window.initializeScale(uploadImgPreview, scalePicture);
+    window.initializeScale(uploadImgPreview, callbackScalePicture);
     var scaleValue = Number(uploadFormResizeValue.value.slice(0, -1));
     uploadImgPreview.style = 'filter:' + filterName + '(' + filterValue + ');' + 'transform: scale(' + scaleValue / 100 + ')';
   }
@@ -214,15 +219,6 @@
     }
   }
 
-  ///////////////////////////////////////
-
-  var scalePicture = function (targetNode, scaleValue) {
-    uploadImgPreview.style.transform = 'scale(' + scaleValue / 100 + ')';
-    uploadFormResizeValue.value = scaleValue + '%';
-  }
-
-  ///////////////////////////////////////
-
   function uploadFormCommentsProperties() {
     uploadFormTextarea.setAttribute('minlength', '30');
     uploadFormTextarea.setAttribute('maxlength', '100');
@@ -230,7 +226,7 @@
   }
 
   function uploadOverlayShow() {
-    window.initializeScale(uploadImgPreview, scalePicture);
+    window.initializeScale(uploadImgPreview, callbackScalePicture);
     upload.querySelector('.upload-overlay').classList.remove('invisible');
   }
 
