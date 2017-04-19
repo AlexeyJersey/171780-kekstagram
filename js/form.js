@@ -74,13 +74,25 @@
 
   };
 
+  var scaleElement = {
+    targetElement: uploadImgPreview,
+    minusButton: uploadFormResizeDec,
+    plusButton: uploadFormResizeInc,
+    scaleValueField: uploadFormResizeValue
+  }
+
+  var scaleOptions = {
+    maxValue: 100,
+    step: 25
+  }
+
   // uploadOverlayHide();
   uploadFormShow();
   uploadFormCommentsProperties();
   onSendButtonClick();
   resetPinPosition();
 
-  window.initializeScale.resizeElement(uploadImgPreview, uploadFormResizeDec, uploadFormResizeInc, uploadFormResizeValue, 100, 25);
+  window.initializeScale.resizeElement(scaleElement, scaleOptions);
 
   uploadFilterLevel.classList.add('invisible');
 

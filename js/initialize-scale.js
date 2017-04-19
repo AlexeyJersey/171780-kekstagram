@@ -3,29 +3,29 @@
 
 window.initializeScale = (function () {
 
-  function resizeElement(targetElement, minusButton, plusButton, scaleValueField, maxValue, step) {
-    scaleValueField.value = maxValue + '%';
-    var scaleValue = Number(scaleValueField.value.slice(0, -1));
-    targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
+  function resizeElement(element, options) {
+    element.scaleValueField.value = options.maxValue + '%';
+    var scaleValue = Number(element.scaleValueField.value.slice(0, -1));
+    element.targetElement.style.transform = 'scale(' + scaleValue / options.maxValue + ')';
 
-    minusButton.addEventListener('click', function (evt) {
-      if (evt.target === minusButton && scaleValue >= (step * 2)) {
-        scaleValue = scaleValue - step;
+    element.minusButton.addEventListener('click', function (evt) {
+      if (evt.target === element.minusButton && scaleValue >= (options.step * 2)) {
+        scaleValue = scaleValue - options.step;
       } else {
-        scaleValue = step;
+        scaleValue = options.step;
       }
-      scaleValueField.value = scaleValue + '%';
-      targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
+      element.scaleValueField.value = scaleValue + '%';
+      element.targetElement.style.transform = 'scale(' + scaleValue / options.maxValue + ')';
     });
 
-    plusButton.addEventListener('click', function (evt) {
-      if (evt.target === plusButton && scaleValue <= (maxValue - step)) {
-        scaleValue = scaleValue + step;
+    element.plusButton.addEventListener('click', function (evt) {
+      if (evt.target === element.plusButton && scaleValue <= (options.maxValue - options.step)) {
+        scaleValue = scaleValue + options.step;
       } else {
-        scaleValue = maxValue;
+        scaleValue = options.maxValue;
       }
-      scaleValueField.value = scaleValue + '%';
-      targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
+      element.scaleValueField.value = scaleValue + '%';
+      element.targetElement.style.transform = 'scale(' + scaleValue / options.maxValue + ')';
     });
   }
 
