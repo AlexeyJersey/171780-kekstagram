@@ -74,13 +74,14 @@
 
   };
 
-  // uploadOverlayHide();
+  uploadOverlayHide();
   uploadFormShow();
   uploadFormCommentsProperties();
-  // onResizeControlsBtnClick();
   renderUploadFilterNodeList();
   onSendButtonClick();
   resetPinPosition();
+
+  window.initializeScale.resizeElement(uploadImgPreview, uploadFormResizeDec, uploadFormResizeInc, uploadFormResizeValue, 100, 25);
 
   uploadFilterLevel.classList.add('invisible');
 
@@ -211,34 +212,6 @@
     if (nodeElement.classList[1]) {
       nodeElement.classList.remove(nodeElement.classList[1]);
     }
-  }
-
-  resizeElement(uploadImgPreview, uploadFormResizeDec, uploadFormResizeInc, uploadFormResizeValue, 100, 25);
-
-  function resizeElement(targetElement, minusButton, plusButton, scaleValueField, maxValue, step) {
-    scaleValueField.value = maxValue + '%';
-    var scaleValue = Number(scaleValueField.value.slice(0, -1));
-    targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
-
-    minusButton.addEventListener('click', function (evt) {
-      if (evt.target === minusButton && scaleValue >= (step * 2)) {
-        scaleValue = scaleValue - step;
-      } else {
-        scaleValue = step;
-      }
-      scaleValueField.value = scaleValue + '%';
-      targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
-    });
-
-    plusButton.addEventListener('click', function (evt) {
-      if (evt.target === plusButton && scaleValue <= (maxValue - step)) {
-        scaleValue = scaleValue + step;
-      } else {
-        scaleValue = maxValue;
-      }
-      scaleValueField.value = scaleValue + '%';
-      targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
-    });
   }
 
   function uploadFormCommentsProperties() {
