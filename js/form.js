@@ -74,10 +74,10 @@
 
   };
 
-  uploadOverlayHide();
+  // uploadOverlayHide();
   uploadFormShow();
   uploadFormCommentsProperties();
-  onResizeControlsBtnClick();
+  // onResizeControlsBtnClick();
   renderUploadFilterNodeList();
   onSendButtonClick();
   resetPinPosition();
@@ -213,29 +213,31 @@
     }
   }
 
-  function onResizeControlsBtnClick() {
-    uploadFormResizeValue.value = 100 + '%';
-    var value = Number(uploadFormResizeValue.value.slice(0, -1));
-    uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
+  resizeElement(uploadImgPreview, uploadFormResizeDec, uploadFormResizeInc, uploadFormResizeValue, 100, 25);
 
-    uploadFormResizeDec.addEventListener('click', function (evt) {
-      if (evt.target === uploadFormResizeDec && value >= 50) {
-        value = value - 25;
+  function resizeElement(targetElement, minusButton, plusButton, scaleValueField, maxValue, step) {
+    scaleValueField.value = maxValue + '%';
+    var scaleValue = Number(scaleValueField.value.slice(0, -1));
+    targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
+
+    minusButton.addEventListener('click', function (evt) {
+      if (evt.target === minusButton && scaleValue >= (step * 2)) {
+        scaleValue = scaleValue - step;
       } else {
-        value = 25;
+        scaleValue = step;
       }
-      uploadFormResizeValue.value = value + '%';
-      uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
+      scaleValueField.value = scaleValue + '%';
+      targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
     });
 
-    uploadFormResizeInc.addEventListener('click', function (evt) {
-      if (evt.target === uploadFormResizeInc && value <= 75) {
-        value = value + 25;
+    plusButton.addEventListener('click', function (evt) {
+      if (evt.target === plusButton && scaleValue <= (maxValue - step)) {
+        scaleValue = scaleValue + step;
       } else {
-        value = 100;
+        scaleValue = maxValue;
       }
-      uploadFormResizeValue.value = value + '%';
-      uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
+      scaleValueField.value = scaleValue + '%';
+      targetElement.style.transform = 'scale(' + scaleValue / maxValue + ')';
     });
   }
 
