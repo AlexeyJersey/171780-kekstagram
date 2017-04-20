@@ -1,8 +1,8 @@
 // initialize-filters.js
 'use strict';
 
-// var cb = function(param) {
-//     console.log(param);
-// };
+window.initializeFilters = function(targetNode, cb) {
 
-// cb('two');
+
+
+};

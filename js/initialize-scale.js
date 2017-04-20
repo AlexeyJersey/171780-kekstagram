@@ -1,7 +1,7 @@
 // initialize-scale.js
 'use strict';
 
-window.initializeScale = function (targetNode, callback) {
+window.initializeScale = function (targetNode, cb) {
   var buttonMinus = document.querySelector('.upload-resize-controls-button-dec');
   var buttonPlus = document.querySelector('.upload-resize-controls-button-inc');
   var elementValue = document.querySelector('.upload-resize-controls-value');
@@ -16,7 +16,7 @@ window.initializeScale = function (targetNode, callback) {
     } else {
       scaleValue = 25;
     }
-    callback(targetNode, scaleValue)
+    cb(targetNode, scaleValue)
   });
 
   buttonPlus.addEventListener('click', function (evt) {
@@ -25,8 +25,8 @@ window.initializeScale = function (targetNode, callback) {
     } else {
       scaleValue = 100;
     }
-    callback(targetNode, scaleValue)
+    cb(targetNode, scaleValue)
   });
 
-  callback(targetNode, scaleValue)
+  cb(targetNode, scaleValue)
 };

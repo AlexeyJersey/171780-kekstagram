@@ -77,7 +77,6 @@
   uploadOverlayHide();
   uploadFormShow();
   uploadFormCommentsProperties();
-  renderUploadFilterNodeList();
   onSendButtonClick();
   resetPinPosition();
 
@@ -129,6 +128,17 @@
 
   });
 
+  /////////////////////////////////////
+
+  // var applyFilter = function(newFilter, oldFilter) {
+  //   uploadImgPreview.classList.remove('filter-' + oldFilter);
+  //   uploadImgPreview.classList.add('filter-' + newFilter);
+  // };
+
+  // window.initializeFilters(uploadFilterControls, applyFilter);
+
+  //////////////////////////////////////////
+
   uploadFilterControls.addEventListener('click', function (evt) {
     var target = evt.target;
     var currentFilterName;
@@ -136,7 +146,7 @@
 
     if (target.tagName === 'INPUT') {
       deleteSecondClass(uploadImgPreview);
-      uploadImgPreview.classList.add(target.dataset.class);
+      uploadImgPreview.classList.add('filter-' + target.value);
 
       currentFilterName = target.value;
       currentFilterDefaultValue = filterObject[currentFilterName].defaultValue;
@@ -203,13 +213,6 @@
     uploadFormTextarea.addEventListener('click', function () {
       uploadFormTextarea.style = 'outline-color: none';
     });
-  }
-
-  function renderUploadFilterNodeList() {
-    var uploadFilterNodeList = uploadFilterControls.querySelectorAll('input');
-    for (var m = 0; m < uploadFilterNodeList.length; m++) {
-      uploadFilterNodeList[m].dataset.class = 'filter-' + uploadFilterNodeList[m].value;
-    }
   }
 
   function deleteSecondClass(nodeElement) {
