@@ -7,12 +7,10 @@
   var uploadOverlay = document.querySelector('.upload-overlay');
   var uploadFormTextarea = document.querySelector('textarea');
   var uploadFormResize = document.querySelector('.upload-resize-controls');
-  var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
-  var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
   var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
   var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
-  var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
 
+  var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
   var uploadFilterLevel = uploadFilterControls.querySelector('.upload-filter-level');
   var uploadFilterLevelPin = uploadFilterControls.querySelector('.upload-filter-level-pin');
   var uploadFilterLevelBar = uploadFilterControls.querySelector('.upload-filter-level-val');
@@ -77,8 +75,6 @@
   uploadOverlayHide();
   uploadFormShow();
   uploadFormCommentsProperties();
-  onResizeControlsBtnClick();
-  renderUploadFilterNodeList();
   onSendButtonClick();
   resetPinPosition();
 
@@ -134,17 +130,14 @@
     var target = evt.target;
     var currentFilterName;
     var currentFilterDefaultValue;
+    window.initializeFilters(uploadFilterControls, applyFilter);
 
     if (target.tagName === 'INPUT') {
-      deleteSecondClass(uploadImgPreview);
-      uploadImgPreview.classList.add(target.dataset.class);
-
       currentFilterName = target.value;
       currentFilterDefaultValue = filterObject[currentFilterName].defaultValue;
       renderFilter(currentFilterName, currentFilterDefaultValue);
       resetPinPosition();
     }
-
 
     if (currentFilterName === 'none') {
       uploadFilterLevel.classList.add('invisible');
@@ -166,7 +159,6 @@
 
   upload.querySelector('#upload-file').addEventListener('change', function () {
     uploadOverlayShow();
-    deleteSecondClass(uploadImgPreview);
   });
 
   document.addEventListener('keydown', function (evt) {
@@ -175,16 +167,26 @@
     }
   });
 
+  function applyFilter(newFilter, oldFilter) {
+    uploadImgPreview.classList.remove(oldFilter);
+    uploadImgPreview.classList.add(newFilter);
+  }
+
+  function ajustScale(targetNode, scaleValue) {
+    uploadImgPreview.style.transform = 'scale(' + scaleValue / 100 + ')';
+    uploadFormResizeValue.value = scaleValue + '%';
+  }
+
   function resetPinPosition() {
     uploadFilterLevelPin.style.left = 100 + '%';
     uploadFilterLevelBar.style.width = uploadFilterLevelPin.style.left;
   }
 
   function renderFilter(filterName, filterValue) {
+    window.initializeScale(uploadImgPreview, ajustScale);
     var scaleValue = Number(uploadFormResizeValue.value.slice(0, -1));
     uploadImgPreview.style = 'filter:' + filterName + '(' + filterValue + ');' + 'transform: scale(' + scaleValue / 100 + ')';
   }
-
 
   function onSendButtonClick() {
     document.querySelector('.upload-form-submit').addEventListener('click', function () {
@@ -200,45 +202,6 @@
     });
   }
 
-  function renderUploadFilterNodeList() {
-    var uploadFilterNodeList = uploadFilterControls.querySelectorAll('input');
-    for (var m = 0; m < uploadFilterNodeList.length; m++) {
-      uploadFilterNodeList[m].dataset.class = 'filter-' + uploadFilterNodeList[m].value;
-    }
-  }
-
-  function deleteSecondClass(nodeElement) {
-    if (nodeElement.classList[1]) {
-      nodeElement.classList.remove(nodeElement.classList[1]);
-    }
-  }
-
-  function onResizeControlsBtnClick() {
-    uploadFormResizeValue.value = 100 + '%';
-    var value = Number(uploadFormResizeValue.value.slice(0, -1));
-    uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
-
-    uploadFormResizeDec.addEventListener('click', function (evt) {
-      if (evt.target === uploadFormResizeDec && value >= 50) {
-        value = value - 25;
-      } else {
-        value = 25;
-      }
-      uploadFormResizeValue.value = value + '%';
-      uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
-    });
-
-    uploadFormResizeInc.addEventListener('click', function (evt) {
-      if (evt.target === uploadFormResizeInc && value <= 75) {
-        value = value + 25;
-      } else {
-        value = 100;
-      }
-      uploadFormResizeValue.value = value + '%';
-      uploadImgPreview.style.transform = 'scale(' + value / 100 + ')';
-    });
-  }
-
   function uploadFormCommentsProperties() {
     uploadFormTextarea.setAttribute('minlength', '30');
     uploadFormTextarea.setAttribute('maxlength', '100');
@@ -246,6 +209,7 @@
   }
 
   function uploadOverlayShow() {
+    window.initializeScale(uploadImgPreview, ajustScale);
     upload.querySelector('.upload-overlay').classList.remove('invisible');
   }
 
