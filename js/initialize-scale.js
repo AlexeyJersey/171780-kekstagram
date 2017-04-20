@@ -16,7 +16,8 @@ window.initializeScale = function (targetNode, cb) {
     } else {
       scaleValue = 25;
     }
-    cb(targetNode, scaleValue)
+
+    cb(targetNode, scaleValue);
   });
 
   buttonPlus.addEventListener('click', function (evt) {
@@ -25,8 +26,9 @@ window.initializeScale = function (targetNode, cb) {
     } else {
       scaleValue = 100;
     }
-    cb(targetNode, scaleValue)
+
+    cb(targetNode, scaleValue);
   });
 
-  cb(targetNode, scaleValue)
+  cb(targetNode, scaleValue);
 };

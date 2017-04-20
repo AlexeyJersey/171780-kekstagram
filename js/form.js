@@ -7,12 +7,10 @@
   var uploadOverlay = document.querySelector('.upload-overlay');
   var uploadFormTextarea = document.querySelector('textarea');
   var uploadFormResize = document.querySelector('.upload-resize-controls');
-  var uploadFormResizeDec = uploadFormResize.querySelector('.upload-resize-controls-button-dec');
-  var uploadFormResizeInc = uploadFormResize.querySelector('.upload-resize-controls-button-inc');
   var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
   var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
-  var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
 
+  var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
   var uploadFilterLevel = uploadFilterControls.querySelector('.upload-filter-level');
   var uploadFilterLevelPin = uploadFilterControls.querySelector('.upload-filter-level-pin');
   var uploadFilterLevelBar = uploadFilterControls.querySelector('.upload-filter-level-val');
@@ -128,26 +126,14 @@
 
   });
 
-  /////////////////////////////////////
-
-  // var applyFilter = function(newFilter, oldFilter) {
-  //   uploadImgPreview.classList.remove('filter-' + oldFilter);
-  //   uploadImgPreview.classList.add('filter-' + newFilter);
-  // };
-
-  // window.initializeFilters(uploadFilterControls, applyFilter);
-
-  //////////////////////////////////////////
 
   uploadFilterControls.addEventListener('click', function (evt) {
     var target = evt.target;
     var currentFilterName;
     var currentFilterDefaultValue;
+    window.initializeFilters(uploadFilterControls, applyFilter);
 
     if (target.tagName === 'INPUT') {
-      deleteSecondClass(uploadImgPreview);
-      uploadImgPreview.classList.add('filter-' + target.value);
-
       currentFilterName = target.value;
       currentFilterDefaultValue = filterObject[currentFilterName].defaultValue;
       renderFilter(currentFilterName, currentFilterDefaultValue);
@@ -175,7 +161,6 @@
 
   upload.querySelector('#upload-file').addEventListener('change', function () {
     uploadOverlayShow();
-    deleteSecondClass(uploadImgPreview);
   });
 
   document.addEventListener('keydown', function (evt) {
@@ -183,6 +168,11 @@
       uploadOverlayHide();
     }
   });
+
+  function applyFilter(newFilter, oldFilter) {
+    uploadImgPreview.classList.remove(oldFilter);
+    uploadImgPreview.classList.add(newFilter);
+  }
 
   function ajustScale(targetNode, scaleValue) {
     uploadImgPreview.style.transform = 'scale(' + scaleValue / 100 + ')';
@@ -213,12 +203,6 @@
     uploadFormTextarea.addEventListener('click', function () {
       uploadFormTextarea.style = 'outline-color: none';
     });
-  }
-
-  function deleteSecondClass(nodeElement) {
-    if (nodeElement.classList[1]) {
-      nodeElement.classList.remove(nodeElement.classList[1]);
-    }
   }
 
   function uploadFormCommentsProperties() {
