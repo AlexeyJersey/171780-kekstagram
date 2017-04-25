@@ -10,6 +10,21 @@ window.moduleFilters = (function () {
     fitersForm.classList.remove('hidden');
   }
 
+  fitersForm.addEventListener('click', function(evt) {
+    var target = evt.target;
+    switch(target.id) {
+      case 'filter-popular':
+      console.log('*click!!*')
+      break;
+      case 'filter-new':
+      console.log('*click!!*')
+      break;
+      case 'filter-discussed':
+      console.log('*click!!*')
+      break;
+    }
+  });
+
   return {
     filtersFormShow: filtersFormShow
   }
