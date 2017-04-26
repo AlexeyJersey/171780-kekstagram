@@ -9,18 +9,18 @@
 
   window.load(url, onLoad, onError);
 
-  fitersForm.addEventListener ('click', function(evt) {
+  fitersForm.addEventListener('click', function (evt) {
     var target = evt.target;
     switch (target.id) {
       case 'filter-popular':
-      window.debounce(renderPictures.bind(null, pictureCollection));
-      break;
+        window.debounce(renderPictures.bind(null, pictureCollection));
+        break;
       case 'filter-new':
-      window.debounce(showNewPictures);
-      break;
+        window.debounce(showNewPictures);
+        break;
       case 'filter-discussed':
-      window.debounce(showDiscussedPictures);
-      break;
+        window.debounce(showDiscussedPictures);
+        break;
     }
   });
 
@@ -41,7 +41,7 @@
 
   function showDiscussedPictures() {
     var collectionCopy = pictureCollection.slice();
-    renderPictures(collectionCopy.sort(commentsCompare))
+    renderPictures(collectionCopy.sort(commentsCompare));
   }
 
   function commentsCompare(left, right) {
@@ -50,6 +50,7 @@
     } else if (left.comments.length > right.comments.length) {
       return -1;
     }
+    return 0;
   }
 
   function filtersFormShow() {
