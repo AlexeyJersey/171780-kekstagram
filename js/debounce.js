@@ -3,7 +3,7 @@
 
 (function () {
 
-  var DEBOUNCE_INTERVAL = 500; //0,5 sec
+  var DEBOUNCE_INTERVAL = 500; // 0,5 sec
 
   var lastTimeout;
   window.debounce = function (fun) {
@@ -11,6 +11,6 @@
       window.clearTimeout(lastTimeout);
     }
     lastTimeout = window.setTimeout(fun, DEBOUNCE_INTERVAL);
-  }
+  };
 
 })();

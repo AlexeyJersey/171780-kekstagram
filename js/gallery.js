@@ -9,17 +9,17 @@
 
   window.load(url, onLoad, onError);
 
-  fitersForm.addEventListener('click', function(evt) {
+  fitersForm.addEventListener ('click', function(evt) {
     var target = evt.target;
-    switch(target.id) {
+    switch (target.id) {
       case 'filter-popular':
-      debounce(renderPictures.bind(null, pictureCollection));
+      window.debounce(renderPictures.bind(null, pictureCollection));
       break;
       case 'filter-new':
-      debounce(showNewPictures);
+      window.debounce(showNewPictures);
       break;
       case 'filter-discussed':
-      debounce(showDiscussedPictures);
+      window.debounce(showDiscussedPictures);
       break;
     }
   });
