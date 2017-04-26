@@ -10,7 +10,6 @@
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
         onLoad(xhr.response);
-        // window.moduleFilters.filtersFormShow();
       } else {
         onError('Ошибка: ' + xhr.status + ' ' + xhr.statusText);
       }

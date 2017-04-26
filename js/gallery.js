@@ -13,7 +13,7 @@
   function onLoad(data) {
     pictureCollection = data;
     filtersFormShow();
-    renderPictures(pictureCollection);
+    renderPictures(pictureCollection.slice().sort(sortRandom));
   }
 
   function sortRandom(a, b) {
