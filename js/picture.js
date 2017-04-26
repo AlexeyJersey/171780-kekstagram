@@ -7,6 +7,7 @@ window.modulePicture = (function () {
     var pictureList = document.querySelector('.pictures');
     var pictureTemplate = document.querySelector('#picture-template').content;
     var pictureListFragment = document.createDocumentFragment();
+    pictureList.innerHTML = '';
 
     for (var k = 0; k < data.length; k++) {
       var pictureElement = pictureTemplate.cloneNode(true);
