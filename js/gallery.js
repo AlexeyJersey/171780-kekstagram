@@ -13,13 +13,13 @@
     var target = evt.target;
     switch(target.id) {
       case 'filter-popular':
-      renderPictures(pictureCollection);
+      debounce(renderPictures.bind(null, pictureCollection));
       break;
       case 'filter-new':
-      showNewPictures(pictureCollection);
+      debounce(showNewPictures.bind(null, pictureCollection));
       break;
       case 'filter-discussed':
-      showDiscussedPictures(pictureCollection);
+      debounce(showDiscussedPictures.bind(null, pictureCollection));
       break;
     }
   });
