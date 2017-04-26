@@ -16,12 +16,10 @@
       renderPictures(pictureCollection);
       break;
       case 'filter-new':
-      showNewPictures();
+      showNewPictures(pictureCollection);
       break;
       case 'filter-discussed':
-      // Обсуждаемые — фотографии, отсортированные в порядке убывания количества комментариев
-
-      console.log('*click*')
+      showDiscussedPictures(pictureCollection);
       break;
     }
   });
@@ -29,7 +27,7 @@
   function onLoad(data) {
     pictureCollection = data;
     filtersFormShow();
-    renderPictures(pictureCollection.slice().sort(randomValue));
+    renderPictures(pictureCollection.slice().sort(randomValueCompare));
   }
 
   function renderPictures(collection) {
@@ -37,24 +35,33 @@
     window.modulePreview.onSmallPictureClick();
   }
 
-  function showNewPictures() {
-    renderPictures(randomElements(pictureCollection));
+  function showNewPictures(collection) {
+    renderPictures(randomElements(collection));
   }
 
-  function showDiscussedPictures() {
+  function showDiscussedPictures(collection) {
+    var collectionCopy = collection.slice();
+    renderPictures(collectionCopy.sort(commentsCompare))
+  }
 
+  function commentsCompare(left, right) {
+    if (left.comments.length < right.comments.length) {
+      return 1;
+    } else if (left.comments.length > right.comments.length) {
+      return -1;
+    }
   }
 
   function filtersFormShow() {
     fitersForm.classList.remove('hidden');
   }
 
-  function randomValue(a, b) {
+  function randomValueCompare(a, b) {
     return Math.random() - 0.5;
   }
 
   function randomElements(collection) {
-    var getRandomElements = collection.slice().sort(randomValue).slice(0, 10);
+    var getRandomElements = collection.slice().sort(randomValueCompare).slice(0, 10);
     return getRandomElements;
   }
 
