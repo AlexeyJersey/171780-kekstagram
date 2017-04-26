@@ -4,35 +4,10 @@
 (function () {
 
   var url = 'https://intensive-javascript-server-kjgvxfepjl.now.sh/kekstagram/data';
-
-  var fitersForm = document.querySelector('.filters');
   var pictureCollection = [];
+  var fitersForm = document.querySelector('.filters');
 
   window.load(url, onLoad, onError);
-
-  function onLoad(data) {
-    pictureCollection = data;
-    filtersFormShow();
-    renderPictures(pictureCollection.slice().sort(sortRandom));
-  }
-
-  function sortRandom(a, b) {
-    return Math.random() - 0.5;
-  }
-
-  function randomElements(collection) {
-    var getRandomElements = collection.slice().sort(sortRandom).slice(0, 10);
-    return getRandomElements;
-  }
-
-  function renderPictures(data) {
-    window.modulePicture.smallPicturesRender(data);
-    window.modulePreview.onSmallPictureClick();
-  }
-
-  function showNewPictures() {
-    renderPictures(randomElements(pictureCollection));
-  }
 
   fitersForm.addEventListener('click', function(evt) {
     var target = evt.target;
@@ -44,13 +19,43 @@
       showNewPictures();
       break;
       case 'filter-discussed':
+      // Обсуждаемые — фотографии, отсортированные в порядке убывания количества комментариев
+
       console.log('*click*')
       break;
     }
   });
 
+  function onLoad(data) {
+    pictureCollection = data;
+    filtersFormShow();
+    renderPictures(pictureCollection.slice().sort(randomValue));
+  }
+
+  function renderPictures(collection) {
+    window.modulePicture.smallPicturesRender(collection);
+    window.modulePreview.onSmallPictureClick();
+  }
+
+  function showNewPictures() {
+    renderPictures(randomElements(pictureCollection));
+  }
+
+  function showDiscussedPictures() {
+
+  }
+
   function filtersFormShow() {
     fitersForm.classList.remove('hidden');
+  }
+
+  function randomValue(a, b) {
+    return Math.random() - 0.5;
+  }
+
+  function randomElements(collection) {
+    var getRandomElements = collection.slice().sort(randomValue).slice(0, 10);
+    return getRandomElements;
   }
 
   function onError(errorMessage) {
