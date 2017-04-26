@@ -56,27 +56,3 @@ window.moduleData = (function () {
   return pictureObjectCollection;
 
 })();
-
-//////////////////////////////////////////////////////////////
-
-  // // console.log(pictureObjectCollection)
-  // var pictureLikes = pictureObjectCollection.map(function (picture, index, array) {
-  //   return picture.likes;
-  // });
-
-  // function compareNumeric(a, b) {
-  //   if (a < b) return 1;
-  //   if (a > b) return -1;
-  // }
-
-  // pictureLikes.sort(compareNumeric)
-  // console.log(pictureLikes)
-
-  // var picturePopular = pictureObjectCollection.filter(function (picture) {
-  //   // return pictureObjectCollection.likes === 88;
-  //   return true;
-  // });
-
-  // pictureObjectCollection.forEach(function (picture) {
-  //   // console.log('Адрес ' + picture.url)
-  // });
