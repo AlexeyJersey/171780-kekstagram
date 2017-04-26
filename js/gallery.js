@@ -5,11 +5,52 @@
 
   var url = 'https://intensive-javascript-server-kjgvxfepjl.now.sh/kekstagram/data';
 
+  var fitersForm = document.querySelector('.filters');
+  var pictureCollection = [];
+
   window.load(url, onLoad, onError);
 
   function onLoad(data) {
+    pictureCollection = data;
+    filtersFormShow();
+    renderPictures(pictureCollection);
+  }
+
+  function sortRandom(a, b) {
+    return Math.random() - 0.5;
+  }
+
+  function randomElements(collection) {
+    var getRandomElements = collection.slice().sort(sortRandom).slice(0, 10);
+    return getRandomElements;
+  }
+
+  function renderPictures(data) {
     window.modulePicture.smallPicturesRender(data);
     window.modulePreview.onSmallPictureClick();
+  }
+
+  function showNewPictures() {
+    renderPictures(randomElements(pictureCollection));
+  }
+
+  fitersForm.addEventListener('click', function(evt) {
+    var target = evt.target;
+    switch(target.id) {
+      case 'filter-popular':
+      renderPictures(pictureCollection);
+      break;
+      case 'filter-new':
+      showNewPictures();
+      break;
+      case 'filter-discussed':
+      console.log('*click*')
+      break;
+    }
+  });
+
+  function filtersFormShow() {
+    fitersForm.classList.remove('hidden');
   }
 
   function onError(errorMessage) {

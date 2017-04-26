@@ -4,29 +4,29 @@
 
 window.moduleFilters = (function () {
 
-  var fitersForm = document.querySelector('.filters');
+  // var fitersForm = document.querySelector('.filters');
 
-  function filtersFormShow() {
-    fitersForm.classList.remove('hidden');
-  }
+  // fitersForm.addEventListener('click', function(evt) {
+  //   var target = evt.target;
+  //   switch(target.id) {
+  //     case 'filter-popular':
+  //     console.log('*click!!*')
+  //     break;
+  //     case 'filter-new':
+  //     console.log('*click!!*')
+  //     break;
+  //     case 'filter-discussed':
+  //     console.log('*click!!*')
+  //     break;
+  //   }
+  // });
 
-  fitersForm.addEventListener('click', function(evt) {
-    var target = evt.target;
-    switch(target.id) {
-      case 'filter-popular':
-      console.log('*click!!*')
-      break;
-      case 'filter-new':
-      console.log('*click!!*')
-      break;
-      case 'filter-discussed':
-      console.log('*click!!*')
-      break;
-    }
-  });
+  // function filtersFormShow() {
+  //   fitersForm.classList.remove('hidden');
+  // }
 
-  return {
-    filtersFormShow: filtersFormShow
-  }
+  // return {
+  //   filtersFormShow: filtersFormShow
+  // }
 
 })();
