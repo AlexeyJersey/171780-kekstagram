@@ -16,10 +16,10 @@
       debounce(renderPictures.bind(null, pictureCollection));
       break;
       case 'filter-new':
-      debounce(showNewPictures.bind(null, pictureCollection));
+      debounce(showNewPictures);
       break;
       case 'filter-discussed':
-      debounce(showDiscussedPictures.bind(null, pictureCollection));
+      debounce(showDiscussedPictures);
       break;
     }
   });
@@ -35,12 +35,12 @@
     window.modulePreview.onSmallPictureClick();
   }
 
-  function showNewPictures(collection) {
-    renderPictures(randomElements(collection));
+  function showNewPictures() {
+    renderPictures(randomElements(pictureCollection));
   }
 
-  function showDiscussedPictures(collection) {
-    var collectionCopy = collection.slice();
+  function showDiscussedPictures() {
+    var collectionCopy = pictureCollection.slice();
     renderPictures(collectionCopy.sort(commentsCompare))
   }
 
@@ -60,8 +60,8 @@
     return Math.random() - 0.5;
   }
 
-  function randomElements(collection) {
-    var getRandomElements = collection.slice().sort(randomValueCompare).slice(0, 10);
+  function randomElements(elements) {
+    var getRandomElements = elements.slice().sort(randomValueCompare).slice(0, 10);
     return getRandomElements;
   }
 
