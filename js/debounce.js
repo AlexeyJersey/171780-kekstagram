@@ -7,7 +7,7 @@
 
   var lastTimeout;
   window.debounce = function (fun) {
-    if (lastTimeout) {
+    if (lastTimeout > 0) {
       window.clearTimeout(lastTimeout);
     }
     lastTimeout = window.setTimeout(fun, DEBOUNCE_INTERVAL);
