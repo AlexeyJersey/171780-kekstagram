@@ -47,10 +47,8 @@
   function commentsCompare(left, right) {
     if (left.comments.length < right.comments.length) {
       return 1;
-    } else if (left.comments.length > right.comments.length) {
-      return -1;
     }
-    return 0;
+    return -1;
   }
 
   function filtersFormShow() {

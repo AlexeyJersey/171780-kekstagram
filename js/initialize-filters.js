@@ -14,10 +14,7 @@
         var newFilter = 'filter-' + target.value;
       }
 
-      if (imgPreview.classList !== imgPreview.classList[0]) {
-        var oldFilter = imgPreview.classList[1];
-      }
-
+      var oldFilter = imgPreview.classList[1];
       cb(newFilter, oldFilter);
     });
 
