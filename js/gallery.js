@@ -4,12 +4,66 @@
 (function () {
 
   var url = 'https://intensive-javascript-server-kjgvxfepjl.now.sh/kekstagram/data';
+  var pictureCollection = [];
+  var fitersForm = document.querySelector('.filters');
 
   window.load(url, onLoad, onError);
 
+  fitersForm.addEventListener('click', function (evt) {
+    var target = evt.target;
+    switch (target.id) {
+      case 'filter-popular':
+        window.debounce(renderPictures.bind(null, pictureCollection));
+        break;
+      case 'filter-new':
+        window.debounce(showNewPictures);
+        break;
+      case 'filter-discussed':
+        window.debounce(showDiscussedPictures);
+        break;
+    }
+  });
+
   function onLoad(data) {
-    window.modulePicture.smallPicturesRender(data);
+    pictureCollection = data;
+    filtersFormShow();
+    renderPictures(pictureCollection.slice().sort(randomValueCompare));
+  }
+
+  function renderPictures(collection) {
+    window.modulePicture.smallPicturesRender(collection);
     window.modulePreview.onSmallPictureClick();
+  }
+
+  function showNewPictures() {
+    renderPictures(randomElements(pictureCollection));
+  }
+
+  function showDiscussedPictures() {
+    var collectionCopy = pictureCollection.slice();
+    renderPictures(collectionCopy.sort(commentsCompare));
+  }
+
+  function commentsCompare(left, right) {
+    if (left.comments.length < right.comments.length) {
+      return 1;
+    } else if (left.comments.length > right.comments.length) {
+      return -1;
+    }
+    return 0;
+  }
+
+  function filtersFormShow() {
+    fitersForm.classList.remove('hidden');
+  }
+
+  function randomValueCompare(a, b) {
+    return Math.random() - 0.5;
+  }
+
+  function randomElements(elements) {
+    var getRandomElements = elements.slice().sort(randomValueCompare).slice(0, 10);
+    return getRandomElements;
   }
 
   function onError(errorMessage) {

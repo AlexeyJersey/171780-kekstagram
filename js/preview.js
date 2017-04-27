@@ -27,9 +27,10 @@ window.modulePreview = (function () {
     for (var l = 0; l < pictureNodeList.length; l++) {
       pictureNodeList[l].addEventListener('click', function (evt) {
         evt.preventDefault();
-        var url = this.pictureProperties.url;
-        var likes = this.pictureProperties.likes;
-        var comments = this.pictureProperties.comments;
+        var target = evt.target;
+        var url = target.parentNode.pictureProperties.url;
+        var likes = target.parentNode.pictureProperties.likes;
+        var comments = target.parentNode.pictureProperties.comments;
         galleryOverlayRender(url, likes, comments);
       });
     }
