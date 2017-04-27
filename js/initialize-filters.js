@@ -1,7 +1,7 @@
 // initialize-filters.js
 'use strict';
 
-window.initializeFilters = function (targetNode, cb) {
+window.onFilterControlClick = function (targetNode, cb) {
   var imgPreview = document.querySelector('.filter-image-preview');
   var filterControls = document.querySelector('.upload-filter-controls');
 

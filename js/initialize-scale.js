@@ -1,7 +1,7 @@
 // initialize-scale.js
 'use strict';
 
-window.initializeScale = function (targetNode, cb) {
+window.onScaleControlsClick = function (targetNode, cb) {
   var buttonMinus = document.querySelector('.upload-resize-controls-button-dec');
   var buttonPlus = document.querySelector('.upload-resize-controls-button-inc');
   var elementValue = document.querySelector('.upload-resize-controls-value');

@@ -6,7 +6,7 @@ window.moduleUtils = (function () {
   var ESC_KEY = 27;
   var ENTER_KEY = 13;
 
-  function numGen(min, max) {
+  function generateNumber(min, max) {
     var numberRandom = Math.random() * (max - min);
     numberRandom = numberRandom.toFixed();
     return +numberRandom;
@@ -17,7 +17,7 @@ window.moduleUtils = (function () {
   }
 
   return {
-    numGen: numGen,
+    generateNumber: generateNumber,
     esc: ESC_KEY,
     enter: ENTER_KEY,
     isActivationEvent: isActivationEvent
