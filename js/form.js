@@ -208,9 +208,15 @@
     uploadFormTextarea.setAttribute('required', 'required');
   }
 
+  function resetUploadImgEffects() {
+    uploadImgPreview.classList.remove(uploadImgPreview.classList[1]);
+    uploadImgPreview.style = '';
+  }
+
   function uploadOverlayShow() {
     window.onScaleControlsClick(uploadImgPreview, ajustScale);
     upload.querySelector('.upload-overlay').classList.remove('invisible');
+    resetUploadImgEffects();
   }
 
   function uploadFormShow() {
