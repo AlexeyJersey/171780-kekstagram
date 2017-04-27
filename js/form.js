@@ -9,6 +9,7 @@
   var uploadFormResize = document.querySelector('.upload-resize-controls');
   var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
   var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
+  var uploadFormSubmitButton = document.querySelector('.upload-form-submit');
 
   var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
   var uploadFilterLevel = uploadFilterControls.querySelector('.upload-filter-level');
@@ -189,7 +190,7 @@
   }
 
   function onSendButtonClick() {
-    document.querySelector('.upload-form-submit').addEventListener('click', function () {
+    uploadFormSubmitButton.addEventListener('click', function () {
       if (uploadFormTextarea.validity.valid === false) {
         uploadFormTextarea.style = 'outline-color: red';
       } else {
