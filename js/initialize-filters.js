@@ -1,22 +1,23 @@
 // initialize-filters.js
 'use strict';
 
-window.initializeFilters = function (targetNode, cb) {
-  var imgPreview = document.querySelector('.filter-image-preview');
-  var filterControls = document.querySelector('.upload-filter-controls');
+(function () {
 
-  filterControls.addEventListener('click', function (evt) {
-    var target = evt.target;
+  window.onFilterControlClick = function (targetNode, cb) {
+    var imgPreview = document.querySelector('.filter-image-preview');
+    var filterControls = document.querySelector('.upload-filter-controls');
 
-    if (target.tagName === 'INPUT') {
-      var newFilter = 'filter-' + target.value;
-    }
+    filterControls.addEventListener('click', function (evt) {
+      var target = evt.target;
 
-    if (imgPreview.classList[1]) {
+      if (target.tagName === 'INPUT') {
+        var newFilter = 'filter-' + target.value;
+      }
+
       var oldFilter = imgPreview.classList[1];
-    }
+      cb(newFilter, oldFilter);
+    });
 
-    cb(newFilter, oldFilter);
-  });
+  };
 
-};
+})();

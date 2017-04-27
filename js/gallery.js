@@ -4,7 +4,7 @@
 (function () {
 
   var url = 'https://intensive-javascript-server-kjgvxfepjl.now.sh/kekstagram/data';
-  var pictureCollection = [];
+  var picturesCollection = [];
   var fitersForm = document.querySelector('.filters');
 
   window.load(url, onLoad, onError);
@@ -13,7 +13,7 @@
     var target = evt.target;
     switch (target.id) {
       case 'filter-popular':
-        window.debounce(renderPictures.bind(null, pictureCollection));
+        window.debounce(renderPictures.bind(null, picturesCollection));
         break;
       case 'filter-new':
         window.debounce(showNewPictures);
@@ -25,9 +25,9 @@
   });
 
   function onLoad(data) {
-    pictureCollection = data;
+    picturesCollection = data;
     filtersFormShow();
-    renderPictures(pictureCollection.slice().sort(randomValueCompare));
+    renderPictures(picturesCollection.slice().sort(randomValueCompare));
   }
 
   function renderPictures(collection) {
@@ -36,21 +36,19 @@
   }
 
   function showNewPictures() {
-    renderPictures(randomElements(pictureCollection));
+    renderPictures(getRandomElements(picturesCollection));
   }
 
   function showDiscussedPictures() {
-    var collectionCopy = pictureCollection.slice();
+    var collectionCopy = picturesCollection.slice();
     renderPictures(collectionCopy.sort(commentsCompare));
   }
 
   function commentsCompare(left, right) {
     if (left.comments.length < right.comments.length) {
       return 1;
-    } else if (left.comments.length > right.comments.length) {
-      return -1;
     }
-    return 0;
+    return -1;
   }
 
   function filtersFormShow() {
@@ -61,9 +59,9 @@
     return Math.random() - 0.5;
   }
 
-  function randomElements(elements) {
-    var getRandomElements = elements.slice().sort(randomValueCompare).slice(0, 10);
-    return getRandomElements;
+  function getRandomElements(elements) {
+    var randomElement = elements.slice().sort(randomValueCompare).slice(0, 10);
+    return randomElement;
   }
 
   function onError(errorMessage) {

@@ -9,6 +9,7 @@
   var uploadFormResize = document.querySelector('.upload-resize-controls');
   var uploadFormResizeValue = uploadFormResize.querySelector('.upload-resize-controls-value');
   var uploadImgPreview = uploadOverlay.querySelector('.filter-image-preview');
+  var uploadFormSubmitButton = document.querySelector('.upload-form-submit');
 
   var uploadFilterControls = uploadOverlay.querySelector('.upload-filter-controls');
   var uploadFilterLevel = uploadFilterControls.querySelector('.upload-filter-level');
@@ -74,7 +75,7 @@
 
   uploadOverlayHide();
   uploadFormShow();
-  uploadFormCommentsProperties();
+  uploadFormCommentsPropertiesSet();
   onSendButtonClick();
   resetPinPosition();
 
@@ -130,7 +131,7 @@
     var target = evt.target;
     var currentFilterName;
     var currentFilterDefaultValue;
-    window.initializeFilters(uploadFilterControls, applyFilter);
+    window.onFilterControlClick(uploadFilterControls, applyFilter);
 
     if (target.tagName === 'INPUT') {
       currentFilterName = target.value;
@@ -183,13 +184,13 @@
   }
 
   function renderFilter(filterName, filterValue) {
-    window.initializeScale(uploadImgPreview, ajustScale);
+    window.onScaleControlsClick(uploadImgPreview, ajustScale);
     var scaleValue = Number(uploadFormResizeValue.value.slice(0, -1));
     uploadImgPreview.style = 'filter:' + filterName + '(' + filterValue + ');' + 'transform: scale(' + scaleValue / 100 + ')';
   }
 
   function onSendButtonClick() {
-    document.querySelector('.upload-form-submit').addEventListener('click', function () {
+    uploadFormSubmitButton.addEventListener('click', function () {
       if (uploadFormTextarea.validity.valid === false) {
         uploadFormTextarea.style = 'outline-color: red';
       } else {
@@ -202,15 +203,21 @@
     });
   }
 
-  function uploadFormCommentsProperties() {
+  function uploadFormCommentsPropertiesSet() {
     uploadFormTextarea.setAttribute('minlength', '30');
     uploadFormTextarea.setAttribute('maxlength', '100');
     uploadFormTextarea.setAttribute('required', 'required');
   }
 
+  function resetUploadImgEffects() {
+    uploadImgPreview.classList.remove(uploadImgPreview.classList[1]);
+    uploadImgPreview.style = '';
+  }
+
   function uploadOverlayShow() {
-    window.initializeScale(uploadImgPreview, ajustScale);
+    window.onScaleControlsClick(uploadImgPreview, ajustScale);
     upload.querySelector('.upload-overlay').classList.remove('invisible');
+    resetUploadImgEffects();
   }
 
   function uploadFormShow() {
@@ -219,6 +226,7 @@
 
   function uploadOverlayHide() {
     upload.querySelector('.upload-overlay').classList.add('invisible');
+    upload.querySelector('#upload-file').value = null;
   }
 
 })();
