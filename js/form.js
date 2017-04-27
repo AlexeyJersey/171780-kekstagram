@@ -219,6 +219,7 @@
 
   function uploadOverlayHide() {
     upload.querySelector('.upload-overlay').classList.add('invisible');
+    upload.querySelector('#upload-file').value = null;
   }
 
 })();
