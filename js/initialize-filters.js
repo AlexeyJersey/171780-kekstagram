@@ -1,6 +1,8 @@
 // initialize-filters.js
 'use strict';
 
+(function(){
+
 window.onFilterControlClick = function (targetNode, cb) {
   var imgPreview = document.querySelector('.filter-image-preview');
   var filterControls = document.querySelector('.upload-filter-controls');
@@ -20,3 +22,5 @@ window.onFilterControlClick = function (targetNode, cb) {
   });
 
 };
+
+})();

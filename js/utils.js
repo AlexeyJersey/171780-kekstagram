@@ -6,18 +6,11 @@ window.moduleUtils = (function () {
   var ESC_KEY = 27;
   var ENTER_KEY = 13;
 
-  function generateNumber(min, max) {
-    var numberRandom = Math.random() * (max - min);
-    numberRandom = numberRandom.toFixed();
-    return +numberRandom;
-  }
-
   function isActivationEvent(evt) {
     return evt.keyCode && evt.keyCode === window.moduleUtils.enter;
   }
 
   return {
-    generateNumber: generateNumber,
     esc: ESC_KEY,
     enter: ENTER_KEY,
     isActivationEvent: isActivationEvent
