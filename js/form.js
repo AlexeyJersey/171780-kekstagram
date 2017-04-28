@@ -128,6 +128,7 @@
   });
 
   uploadFilterControls.addEventListener('click', function (evt) {
+    debugger;
     var target = evt.target;
     var currentFilterName;
     var currentFilterDefaultValue;
@@ -136,9 +137,9 @@
     if (target.tagName === 'INPUT') {
       currentFilterName = target.value;
       currentFilterDefaultValue = filterObject[currentFilterName].defaultValue;
-      renderFilter(currentFilterName, currentFilterDefaultValue);
       resetPinPosition();
       resetUploadImgEffects();
+      renderFilter(currentFilterName, currentFilterDefaultValue);
     }
 
     if (currentFilterName === 'none') {

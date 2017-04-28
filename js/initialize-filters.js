@@ -9,12 +9,14 @@
 
     filterControls.addEventListener('click', function (evt) {
       var target = evt.target;
+      var oldFilter = imgPreview.classList[1];
 
       if (target.tagName === 'INPUT') {
         var newFilter = 'filter-' + target.value;
+      } else {
+        return false;
       }
 
-      var oldFilter = imgPreview.classList[1];
       cb(newFilter, oldFilter);
     });
 
