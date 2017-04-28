@@ -128,7 +128,6 @@
   });
 
   uploadFilterControls.addEventListener('click', function (evt) {
-    debugger;
     var target = evt.target;
     var currentFilterName;
     var currentFilterDefaultValue;
@@ -140,12 +139,11 @@
       resetPinPosition();
       resetUploadImgEffects();
       renderFilter(currentFilterName, currentFilterDefaultValue);
+      uploadFilterLevel.classList.remove('invisible');
     }
 
-    if (currentFilterName === 'none') {
+    if (target.tagName === 'INPUT' && currentFilterName === 'none') {
       uploadFilterLevel.classList.add('invisible');
-    } else {
-      uploadFilterLevel.classList.remove('invisible');
     }
 
   });
@@ -187,7 +185,6 @@
 
   function renderFilter(filterName, filterValue) {
     window.onScaleControlsClick(uploadImgPreview, ajustScale);
-    var scaleValue = Number(uploadFormResizeValue.value.slice(0, -1));
     uploadImgPreview.style.filter = filterName + '(' + filterValue + ')';
   }
 
@@ -214,6 +211,7 @@
   function resetUploadImgEffects() {
     uploadImgPreview.classList.remove(uploadImgPreview.classList[1]);
     uploadImgPreview.removeAttribute('style');
+    uploadFilterLevel.classList.add('invisible');
   }
 
   function uploadOverlayShow() {

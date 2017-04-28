@@ -13,8 +13,6 @@
 
       if (target.tagName === 'INPUT') {
         var newFilter = 'filter-' + target.value;
-      } else {
-        return false;
       }
 
       cb(newFilter, oldFilter);
