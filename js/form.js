@@ -187,13 +187,7 @@
   function renderFilter(filterName, filterValue) {
     window.onScaleControlsClick(uploadImgPreview, ajustScale);
     var scaleValue = Number(uploadFormResizeValue.value.slice(0, -1));
-    // uploadImgPreview.style = 'filter:' + filterName + '(' + filterValue + ');' + 'transform: scale(' + scaleValue / 100 + ')';
-    // var asd = '[' + style + ']';
-    // uploadImgPreview.asd = 'filter:' + filterName + '(' + filterValue + ')';
-
-    // element.style.backgroundColor = "red";
     uploadImgPreview.style.filter = filterName + '(' + filterValue + ')';
-    console.log(uploadImgPreview)
   }
 
   function onSendButtonClick() {
