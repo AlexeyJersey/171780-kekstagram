@@ -211,7 +211,7 @@
 
   function resetUploadImgEffects() {
     uploadImgPreview.classList.remove(uploadImgPreview.classList[1]);
-    uploadImgPreview.style = '';
+    uploadImgPreview.removeAttribute('style');
   }
 
   function uploadOverlayShow() {
